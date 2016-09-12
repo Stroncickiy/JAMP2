@@ -1,9 +1,9 @@
 package com.epam;
 
-import com.epam.transmission.AutomaticTransmission;
-import com.epam.transmission.ManualToAutomaticAdapter;
-import com.epam.transmission.ManualTransmission;
-import com.epam.transmission.ManualTransmissionImpl;
+import com.epam.adapter.AutomaticTransmission;
+import com.epam.adapter.ManualToAutomaticAdapter;
+import com.epam.adapter.ManualTransmission;
+import com.epam.adapter.ManualTransmissionImpl;
 
 public class AdapterSample {
 	public static void exec() {

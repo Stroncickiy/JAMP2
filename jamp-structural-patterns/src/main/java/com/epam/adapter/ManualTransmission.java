@@ -1,4 +1,4 @@
-package com.epam.transmission;
+package com.epam.adapter;
 
 public interface ManualTransmission {
 	int getGear();

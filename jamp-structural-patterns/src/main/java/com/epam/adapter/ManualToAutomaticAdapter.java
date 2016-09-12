@@ -1,4 +1,4 @@
-package com.epam.transmission;
+package com.epam.adapter;
 
 public class ManualToAutomaticAdapter implements AutomaticTransmission {
 
