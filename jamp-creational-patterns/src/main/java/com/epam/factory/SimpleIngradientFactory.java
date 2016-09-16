@@ -11,6 +11,9 @@ public class SimpleIngradientFactory extends AbstractIngradientFactory {
 
 	private static SimpleIngradientFactory instance;
 
+	private SimpleIngradientFactory() {
+	}
+
 	@Override
 	public Eggs createEggs(Integer weigth) {
 		return new Eggs(weigth);

@@ -5,29 +5,29 @@ public class ManualToAutomaticAdapter implements AutomaticTransmission {
 	private ManualTransmission manualTransmission;
 
 	public ManualToAutomaticAdapter(ManualTransmission manualTransmission) {
-		this.manualTransmission = manualTransmission;
+		this.setManualTransmission(manualTransmission);
 	}
 
 	@Override
 	public void gearUp() {
-		int currentGear = manualTransmission.getGear();
+		int currentGear = getManualTransmission().getGear();
 		switch (currentGear) {
 		case -1:
-			manualTransmission.neutralGear();
+			getManualTransmission().neutralGear();
 			break;
 		case 0:
-			manualTransmission.firstGear();
+			getManualTransmission().firstGear();
 			break;
 		case 1:
-			manualTransmission.secondGear();
+			getManualTransmission().secondGear();
 			break;
 		case 2:
-			manualTransmission.thirdGear();
+			getManualTransmission().thirdGear();
 			break;
 		case 3:
-			manualTransmission.fourthGear();
+			getManualTransmission().fourthGear();
 			break;
-		default:
+		case 4:
 			System.out.println("max gear reached " + currentGear);
 			break;
 		}
@@ -36,27 +36,35 @@ public class ManualToAutomaticAdapter implements AutomaticTransmission {
 
 	@Override
 	public void gearDown() {
-		int currentGear = manualTransmission.getGear();
+		int currentGear = getManualTransmission().getGear();
 		switch (currentGear) {
 		case -1:
 			System.out.println("min gear reached " + currentGear);
 			break;
 		case 0:
-			manualTransmission.backGear();
+			getManualTransmission().backGear();
 			break;
 		case 1:
-			manualTransmission.neutralGear();
+			getManualTransmission().neutralGear();
 			break;
 		case 2:
-			manualTransmission.firstGear();
+			getManualTransmission().firstGear();
 			break;
 		case 3:
-			manualTransmission.secondGear();
+			getManualTransmission().secondGear();
 			break;
 		case 4:
-			manualTransmission.thirdGear();
+			getManualTransmission().thirdGear();
 			break;
 		}
+	}
+
+	public ManualTransmission getManualTransmission() {
+		return manualTransmission;
+	}
+
+	public void setManualTransmission(ManualTransmission manualTransmission) {
+		this.manualTransmission = manualTransmission;
 	}
 
 }

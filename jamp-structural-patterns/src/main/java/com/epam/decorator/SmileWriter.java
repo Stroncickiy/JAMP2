@@ -1,8 +1,22 @@
 package com.epam.decorator;
 
-public class SmileWriter {
+import java.io.IOException;
+import java.io.Writer;
 
-	public void write() {
+public class SmileWriter {
+	private Writer writer;
+
+	public SmileWriter(Writer writer) {
+		this.writer = writer;
+	}
+
+	public void write(String string) {
+		String stringWithSmile = string += " :)";
+		try {
+			writer.write(stringWithSmile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 }

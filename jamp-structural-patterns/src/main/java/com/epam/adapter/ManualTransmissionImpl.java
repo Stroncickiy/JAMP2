@@ -2,7 +2,7 @@ package com.epam.adapter;
 
 public class ManualTransmissionImpl implements ManualTransmission {
 
-	private int currentGear = 0;
+	private int currentGear;
 
 	@Override
 	public int getGear() {

@@ -4,7 +4,7 @@ import com.epam.builder.LiqueurBuilder;
 import com.epam.factory.AbstractIngradientFactory;
 import com.epam.liquer.Liqueur;
 
-public class LiqueurCreator extends AbstractLiqueurCreator {
+public class LiqueurCreator implements AbstractLiqueurFromFactoryCreator,AbstractLiqueurFromBuilderCreator {
 	@Override
 	public Liqueur createLiqueur(AbstractIngradientFactory ingradientFactory) {
 		Liqueur liqueur = new Liqueur();

@@ -14,5 +14,8 @@ public class Main {
 		SingletonAndAbstractFactorySample.exec();
 		System.out.println();
 
+		System.out.println(" == Factory Method usage sample ==");
+		FactoryMethodSample.exec();
+
 	}
 }

@@ -2,7 +2,7 @@ package com.epam.ingradient;
 
 public class Cream extends Ingredient {
 
-	private Integer fat;
+	protected Integer fat;
 
 	public Cream(Integer weight, Integer fat) {
 		super(weight);

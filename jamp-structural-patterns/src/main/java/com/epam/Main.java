@@ -1,5 +1,7 @@
 package com.epam;
 
+import java.io.IOException;
+
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("== Adapter sample ==");
@@ -13,6 +15,13 @@ public class Main {
 
 		System.out.println("== Facade sample ==");
 		FacadeSample.exec();
+
+		System.out.println("== Decorator sample ==");
+		try {
+			DecoratorSample.exec();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 }

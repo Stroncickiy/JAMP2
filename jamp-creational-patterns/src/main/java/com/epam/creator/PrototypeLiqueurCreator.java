@@ -4,7 +4,7 @@ import com.epam.builder.LiqueurBuilder;
 import com.epam.factory.AbstractIngradientFactory;
 import com.epam.liquer.Liqueur;
 
-public class PrototypeLiqueurCreator extends AbstractLiqueurCreator {
+public class PrototypeLiqueurCreator implements AbstractLiqueurFromFactoryCreator {
 
 	protected Liqueur liqueurPrototype;
  
@@ -19,16 +19,6 @@ public class PrototypeLiqueurCreator extends AbstractLiqueurCreator {
 
 	@Override
 	public Liqueur createLiqueur(AbstractIngradientFactory abstractLiqueurFactory) {
-		try {
-			return (Liqueur) liqueurPrototype.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		return liqueurPrototype;
-	}
-
-	@Override
-	public Liqueur createLiqueur(LiqueurBuilder builder) {
 		try {
 			return (Liqueur) liqueurPrototype.clone();
 		} catch (CloneNotSupportedException e) {
