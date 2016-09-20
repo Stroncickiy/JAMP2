@@ -7,9 +7,11 @@ public class Main {
 
 		System.out.println("== Proxy sample == ");
 		ProxySample.exec();
-		
+
 		System.out.println("== ChainOfResponsibility  Sample  ==");
 		ChainOfResponsibilitySample.exec();
-		
+
+		System.out.println("==  Command example ==");
+		CommandSample.exec();
 	}
 }

@@ -11,7 +11,7 @@ public class ChainOfResponsibilitySample {
 		ConstructionFirm constructionFirm = new ConstructionFirm();
 		constructionFirm.addSubordinateFirm(new RepairFirm());
 		constructionFirm.handleClientRequest(BuildType.AMBAR);
-		
+
 	}
 
 }
