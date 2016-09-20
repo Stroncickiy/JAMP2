@@ -3,12 +3,12 @@ package com.epam.proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProxyBankAccount implements BankAccount {
+public class ProxySecuredBankAccount implements BankAccount {
 
 	private BankAccount realAccount;
 	private Map<String, String> userPasswords;
 
-	public ProxyBankAccount(BankAccount realAccount) {
+	public ProxySecuredBankAccount(BankAccount realAccount) {
 		this.userPasswords = new HashMap<>();
 		this.realAccount = realAccount;
 

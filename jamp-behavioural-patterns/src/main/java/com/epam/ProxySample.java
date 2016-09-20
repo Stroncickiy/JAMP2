@@ -2,14 +2,14 @@ package com.epam;
 
 import com.epam.proxy.BankAccount;
 import com.epam.proxy.ConcreteBankAccount;
-import com.epam.proxy.ProxyBankAccount;
+import com.epam.proxy.ProxySecuredBankAccount;
 import com.epam.proxy.UserProfile;
 
 public class ProxySample {
 	public static void exec() {
 
 		BankAccount realAccount = new ConcreteBankAccount();
-		BankAccount account = new ProxyBankAccount(realAccount);
+		BankAccount account = new ProxySecuredBankAccount(realAccount);
 
 		UserProfile userProfile = new UserProfile("Bob", "qweqwe", 100);
 		UserProfile userProfileWrongPass = new UserProfile("Bob", "qweqwe1", 100);
