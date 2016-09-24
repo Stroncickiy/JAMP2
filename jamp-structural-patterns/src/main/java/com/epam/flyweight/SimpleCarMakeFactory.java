@@ -16,12 +16,21 @@ public class SimpleCarMakeFactory implements CarMakeFlyweightFactory {
 		return ((CarMakeFlyweight) cars.get(key)).getCount();
 	}
 
-	@Override
-	public void registerCar(CarMakeFlyweight carMakeFlyweight) {
-		cars.put(carMakeFlyweight.getIdentifier(), carMakeFlyweight);
+	public void registerAction(CarMakeContext carMakeContext) {
+		if (!cars.containsKey(carMakeContext.getCarMake())) {
+			cars.put(carMakeContext.getCarMake(), createFlyWeight(carMakeContext.getCarMake()));
+		}
+		cars.get(carMakeContext.getCarMake()).recalculate(carMakeContext);
 	}
 
-	public void registerAction(CarMakeContext carMakeContext) {
-		cars.get(carMakeContext.getCarMake()).recalculate(carMakeContext);
+	private CarMakeFlyweight createFlyWeight(String carMake) {
+		switch (carMake) {
+		case "Bmw":
+			return new Bmw(carMake);
+		case "Ford":
+			return new Ford(carMake);
+
+		}
+		return null;
 	}
 }

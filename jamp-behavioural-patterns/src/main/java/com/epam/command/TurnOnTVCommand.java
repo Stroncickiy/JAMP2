@@ -4,7 +4,7 @@ public class TurnOnTVCommand implements Command {
 
 	@Override
 	public void execute() {
-		System.out.println(" TV was turned on ");
+		System.out.println(" TV was turned ON ");
 
 	}
 

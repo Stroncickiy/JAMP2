@@ -23,5 +23,11 @@ public class Main {
 			e.printStackTrace();
 		}
 
+		System.out.println("== Proxy sample == ");
+		ProxySample.exec();
+
+		System.out.println(" == Flyweight sample ==");
+		FlyweightSample.exec();
+
 	}
 }

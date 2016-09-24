@@ -4,6 +4,10 @@ public abstract class CarMakeFlyweight {
 	protected String identifier;
 	protected int count;
 
+	public CarMakeFlyweight(String carMake) {
+		this.identifier = carMake;
+	}
+
 	public void recalculate(CarMakeContext context) {
 		if (context.getActionType().equals(ActionType.ARRIVAL)) {
 			count++;

@@ -6,11 +6,19 @@ public class RemoteController {
 		command.execute();
 	}
 
-	public void turnOnTV() {
+	public void turnOnTVCommand() {
 		performAction(new TurnOnTVCommand());
 	}
 
-	public void turnOnLights() {
+	public void turnOnLightsCommand() {
 		performAction(new TurnOnLightCommand());
+	}
+	
+	public void turnOffLightsCommand(){
+		performAction(new TurnOffLightCommand());
+	}
+	
+	public void turnOffTVCommand(){
+		performAction(new TurnOffTVCommand());
 	}
 }

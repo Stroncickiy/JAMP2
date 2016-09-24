@@ -6,8 +6,10 @@ public class CommandSample {
 	public static void exec() {
 		RemoteController controller = new RemoteController();
 
-		controller.turnOnLights();
-		controller.turnOnTV();
+		controller.turnOnLightsCommand();
+		controller.turnOnTVCommand();
+		controller.turnOffTVCommand();
+		controller.turnOffLightsCommand();
 
 	}
 }

@@ -4,7 +4,9 @@ public class ExteriorFirm implements SubordinateFirm {
 
 	@Override
 	public void handle(BuildType buildType) {
-		System.out.println(" exterior designed for " + buildType);
+		if (!buildType.equals(BuildType.AMBAR)) {
+			System.out.println(" exterior designed for " + buildType);
+		}
 
 	}
 
