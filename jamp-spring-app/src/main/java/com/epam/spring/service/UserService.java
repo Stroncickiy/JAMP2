@@ -4,29 +4,17 @@ import com.epam.spring.model.User;
 
 import java.util.List;
 
-
 public interface UserService {
 
-    User register(User user);
+	User register(User user);
 
-    void remove(long id);
+	void remove(long id);
 
-    User getById(long id);
+	User getById(long id);
 
-    List<User> getAll();
+	List<User> getAll();
 
-    void update(User user);
-
-
-    void processAllUsers();
-
-    void removeAllProcessedByDateAndTime();
-
-
-    void addUserToDbScheduled();
-
-    void longMethod();
+	void update(User user);
 
 	User getUserByEmail(String email);
 }
-

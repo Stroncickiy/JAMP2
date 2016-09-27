@@ -63,7 +63,7 @@ public class AuthController {
 			roles.addAll(user.getRoles());
 		}
 		user.setRoles(roles);
-		user.setBirthday(LocalDate.now());
+		user.setBirthDate(LocalDate.now());
 		user.setEnabled(true);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userService.register(user);
