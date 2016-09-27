@@ -1,16 +1,31 @@
 package com.epam.spring.model;
 
-import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class MentorshipPhase {
+@Entity
+public class MentorshipPhase   {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
 	private String location;
-	private LocalDate startDate;
-	private LocalDate endDate;
+	@Temporal(TemporalType.DATE)
+	private Date startDate;
+	@Temporal(TemporalType.DATE)
+	private Date endDate;
+	@OneToMany
+	private List<PhaseParticipantAssignment> participants;
+	@OneToMany
+	private List<MentorshipGroup> groups;
 
 	public String getTitle() {
 		return title;
@@ -28,19 +43,19 @@ public class MentorshipPhase {
 		this.location = location;
 	}
 
-	public LocalDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -50,6 +65,14 @@ public class MentorshipPhase {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<PhaseParticipantAssignment> getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(List<PhaseParticipantAssignment> participants) {
+		this.participants = participants;
 	}
 
 }

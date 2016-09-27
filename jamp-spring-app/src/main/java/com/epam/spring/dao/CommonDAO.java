@@ -1,18 +1,16 @@
 package com.epam.spring.dao;
 
-
 import java.util.List;
-
 
 public interface CommonDAO<O> {
 
-    O add(O item);
+	O add(O item);
 
-    void update(O item);
+	boolean update(O item);
 
-    void remove(Long key);
+	boolean remove(O item);
 
-    List<O> getAll();
+	List<O> getAll();
 
-    O getById(Long key);
+	O getById(Long key);
 }

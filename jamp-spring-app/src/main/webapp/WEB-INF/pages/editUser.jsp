@@ -20,8 +20,8 @@
         <form:input path="firstName"></form:input>
         <form:label path="lastName">LastName</form:label>
         <form:input path="lastName"></form:input>
-        <form:label  path="birthday">Birthday MM/dd/yyyy</form:label>
-        <form:input  path="birthday"></form:input>
+        <form:label  path="birthDate">Birthday MM/dd/yyyy</form:label>
+        <form:input  path="birthDate"></form:input>
         <form:button type="submit">Save</form:button>
     </form:form>
 

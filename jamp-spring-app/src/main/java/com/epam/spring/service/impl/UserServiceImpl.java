@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.epam.spring.dao.UserDAO;
 import com.epam.spring.model.User;
 import com.epam.spring.service.UserService;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -19,8 +21,8 @@ public class UserServiceImpl implements UserService {
 		return userDAO.add(user);
 	}
 
-	public void remove(long id) {
-		userDAO.remove(id);
+	public void remove(User user) {
+		userDAO.remove(user);
 	}
 
 	public User getById(long id) {
@@ -40,6 +42,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserByEmail(String email) {
 		return userDAO.getUserByEmail(email);
+	}
+
+	@Override
+	public User getById(Long id) {
+		return userDAO.getById(id);
 	}
 
 }

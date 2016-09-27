@@ -19,7 +19,7 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object objectToValidate, Errors errors) {
 		User user = (User) objectToValidate;
-		int length = user.getName().length();
+		int length = user.getFirstName().length();
 		if (length < 3 || length > 10) {
 			errors.reject(invalidUserMessage);
 		}

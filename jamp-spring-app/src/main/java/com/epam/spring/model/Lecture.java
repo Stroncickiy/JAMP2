@@ -1,17 +1,28 @@
 package com.epam.spring.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class Lecture {
+@Entity
+public class Lecture   {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String domainArea;
 	private String topic;
+	@OneToOne
 	private PhaseParticipantAssignment lector;
-	private LocalDateTime startTime;
-	private LocalDateTime endTime;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date startTime;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date endTime;
 
 	public Long getId() {
 		return id;
@@ -45,19 +56,19 @@ public class Lecture {
 		this.lector = lector;
 	}
 
-	public LocalDateTime getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalDateTime startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
-	public LocalDateTime getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalDateTime endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 

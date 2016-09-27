@@ -1,16 +1,28 @@
-package com.epam.spring.model;
+ package com.epam.spring.model;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import com.epam.spring.app.enums.ParticipantRole;
 import com.epam.spring.enums.ParticipantStatus;
 
-public class PhaseParticipantAssignment {
+@Entity
+public class PhaseParticipantAssignment  {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@ManyToOne
 	private User assignee;
 	private ParticipantRole role;
+	@Enumerated(EnumType.STRING)
 	private ParticipantStatus status;
+	@ManyToOne
+	private MentorshipPhase mentorshipPhase;
 
 	public User getAssignee() {
 		return assignee;
@@ -42,6 +54,14 @@ public class PhaseParticipantAssignment {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public MentorshipPhase getMentorshipPhase() {
+		return mentorshipPhase;
+	}
+
+	public void setMentorshipPhase(MentorshipPhase mentorshipPhase) {
+		this.mentorshipPhase = mentorshipPhase;
 	}
 
 }

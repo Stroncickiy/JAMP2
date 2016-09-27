@@ -1,7 +1,6 @@
 package com.epam.spring.controller;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -63,7 +62,7 @@ public class AuthController {
 			roles.addAll(user.getRoles());
 		}
 		user.setRoles(roles);
-		user.setBirthDate(LocalDate.now());
+		user.setBirthDate(new Date());
 		user.setEnabled(true);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userService.register(user);

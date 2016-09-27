@@ -21,7 +21,7 @@
             <th>firstName</th>
             <th>lastName</th>
             <th>birthday</th>
-            <th>processed</th>
+            <th>enabled</th>
             <th>Additional</th>
         </tr>
         </thead>
@@ -31,8 +31,8 @@
                 <td>${user.id}</td>
                 <td>${user.firstName}</td>
                 <td>${user.lastName}</td>
-                <td>${user.birthday}</td>
-                <td>${user.processed}</td>
+                <td>${user.birthDate}</td>
+                <td>${user.enabled}</td>
                 <td><a href="${pageContext.request.contextPath}/users/remove/${user.id}">Remove</a>
                     <a href="${pageContext.request.contextPath}/users/edit/${user.id}">Edit</a></td>
             </tr>

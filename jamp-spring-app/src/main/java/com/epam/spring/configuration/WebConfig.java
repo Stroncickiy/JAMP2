@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -35,6 +36,7 @@ import com.epam.spring.converter.LocalDateConverter;
 @EnableAsync
 @EnableScheduling
 @EnableAspectJAutoProxy
+@EntityScan(basePackages = { "com.epam.spring.model" })
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
 
@@ -61,8 +63,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("classpath:create-db.sql")
-				.build();
+		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();
 
 	}
 

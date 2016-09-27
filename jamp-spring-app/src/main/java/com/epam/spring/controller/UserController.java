@@ -57,13 +57,17 @@ public class UserController {
 
 	@RequestMapping(path = "edit", method = RequestMethod.POST)
 	public String updateUserData(@ModelAttribute User userToEdit) {
-		userService.update(userToEdit);
+		User currentUser = userService.getById(userToEdit.getId());
+		if (currentUser != null) {
+			currentUser.updateFields(userToEdit);
+			userService.update(currentUser);
+		}
 		return "redirect:/users/all";
 	}
 
 	@RequestMapping(path = "remove/{userId}")
 	public String removeUser(@PathVariable("userId") Long id) {
-		userService.remove(id);
+		userService.remove(userService.getById(id));
 		return "redirect:/users/all";
 	}
 
