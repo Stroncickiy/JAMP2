@@ -26,6 +26,9 @@ public class Main {
 		System.out.println(" == Strategy Sample == ");
 		StrategySample.exec();
 
+		System.out.println("== Visitor Sample ==");
+		VisitorSample.exec();
+
 		System.out.println("== Mediator sample ==");
 		MediatorSample.exec();
 
