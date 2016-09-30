@@ -24,6 +24,9 @@
 					<th>Birth Date</th>
 					<th>Level</th>
 					<th>Skill</th>
+					<th>Creation Time</th>
+					<th>Last Updated By</th>
+					<th>Last Updated Time</th>
 					<th>Control</th>
 				</tr>
 			</thead>
@@ -37,6 +40,9 @@
 						<td>${user.birthDate}</td>
 						<td>${user.level}</td>
 						<td>${user.primarySkill}</td>
+						<td>${user.creationTime}</td>
+						<td>${user.lastUpdatedBy.email}</td>
+						<td>${user.lastUpdatedTime}</td>
 						<td>
 							<sec:authorize access="isAuthenticated() AND hasAuthority('ADMIN')"> 
 								<a href="${pageContext.request.contextPath}/users/edit/${user.id}">Edit</a>

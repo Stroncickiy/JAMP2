@@ -42,6 +42,14 @@ public class User {
 	private List<UserRole> roles;
 	@OneToMany
 	private List<PhaseParticipantAssignment> assignments;
+	@OneToOne
+	private User lastUpdatedBy;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private Date creationTime;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private Date lastUpdatedTime;
 
 	public Long getId() {
 		return id;
@@ -156,6 +164,35 @@ public class User {
 	public String getFullName() {
 		return firstName + " " + lastName;
 	}
-	
 
+	public User getLastUpdatedBy() {
+		return lastUpdatedBy;
+	}
+
+	public void setLastUpdatedBy(User lastUpdatedBy) {
+		this.lastUpdatedBy = lastUpdatedBy;
+	}
+
+	public Date getCreationTime() {
+		return creationTime;
+	}
+
+	public void setCreationTime(Date creationTime) {
+		this.creationTime = creationTime;
+	}
+
+	public Date getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(Date lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+	}
+	
+	
 }
