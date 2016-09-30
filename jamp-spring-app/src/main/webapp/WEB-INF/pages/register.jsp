@@ -8,12 +8,30 @@
 <title>Spring APP</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <jsp:include page="essentials/essentials.jsp" />
+<script type="application/javascript">
+var positions = ["Junior","Middle","Senior","Lead","Manager"];	
+function setLevelTextValue(numberAsString){
+	document.getElementById("levelCaption").innerHTML  =positions[parseInt(numberAsString)];
+}
+</script>
 </head>
 <body>
 	<div id="shell">
 		<!-- Main -->
 		<div id="main">
 			<form:form method="post" action="register" modelAttribute="newUser">
+				<label>Account Data</label>
+				<div class="input-group input-sm">
+					<form:label path="email" cssClass="input-group-addon">Email</form:label>
+					<form:input path="email" cssClass="form-control"
+						required="required"></form:input>
+				</div>
+				<div class="input-group input-sm">
+					<form:label path="password" cssClass="input-group-addon">Password</form:label>
+					<form:input path="password" cssClass="form-control" type="password"
+						required="required"></form:input>
+				</div>
+				<label>Personal Data</label>
 				<div class="input-group input-sm">
 					<form:label path="firstName" cssClass="input-group-addon">First Name</form:label>
 					<form:input path="firstName" cssClass="form-control"
@@ -25,13 +43,14 @@
 						required="required"></form:input>
 				</div>
 				<div class="input-group input-sm">
-					<form:label path="email" cssClass="input-group-addon">Email</form:label>
-					<form:input path="email" cssClass="form-control"
+					<form:label path="birthDate" cssClass="input-group-addon">Birth Date [yyyy-MM-dd]</form:label>
+					<form:input path="birthDate" cssClass="form-control"
 						required="required"></form:input>
 				</div>
+				<label>Employee Data</label>
 				<div class="input-group input-sm">
-					<form:label path="password" cssClass="input-group-addon">Password</form:label>
-					<form:input path="password" cssClass="form-control" type="password"
+					<form:label path="primarySkill" cssClass="input-group-addon">Primary Skill</form:label>
+					<form:input path="primarySkill" cssClass="form-control" 
 						required="required"></form:input>
 				</div>
 				<div class="input-group input-sm">
@@ -41,6 +60,14 @@
 						<form:options items="${availableRoles}"></form:options>
 					</form:select>
 				</div>
+				<div class="input-group input-sm">
+					<form:label path="level" cssClass="input-group-addon">Level</form:label>
+					<form:input path="level" cssClass="form-control" type="range"
+						min="0" max="4" oninput="setLevelTextValue(this.value)"
+						required="required"></form:input>
+					<label id="levelCaption"></label>
+				</div>
+
 				<form:button type="submit" class="btn right">Submit</form:button>
 			</form:form>
 		</div>

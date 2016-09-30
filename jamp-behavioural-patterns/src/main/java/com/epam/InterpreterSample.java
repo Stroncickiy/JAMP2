@@ -3,8 +3,8 @@ package com.epam;
 import com.epam.interpreter.BooleanExpressionEvaluator;
 
 public class InterpreterSample {
-	private static final String EXPRESSION_1 = "TRUE OR FALSE AND TRUE";
-	private static final String EXPRESSION_2 = "NOT FALSE AND NOT TRUE";
+	private static final String EXPRESSION_1 = "TRUE OR FALSE AND TRUE ";
+	private static final String EXPRESSION_2 = "NOT FALSE AND NOT TRUE OR NOT FALSE ";
 	
 	public static void exec() {
 		BooleanExpressionEvaluator booleanExpressionEvaluator = new BooleanExpressionEvaluator();

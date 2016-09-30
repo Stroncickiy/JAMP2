@@ -1,30 +1,26 @@
 package com.epam.memento;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.Random;
 
 public class Shop {
-	private ObjectOutputStream fileOutputStream;
-	private ObjectInputStream fileInputStream;
-	private File backupFile;
 	private Offer userOffer;
 	private OfferDataKeeper offerDataKeeper;
+	private ObjectOutputStream fileOutputStream;
+	private ObjectInputStream fileInputStream;
 
-	public Shop(String backupFileName) {
-		backupFile = new File(backupFileName);
+	public Shop(InputStream inputStream, OutputStream outputStream) {
 		try {
-			fileOutputStream = new ObjectOutputStream(new FileOutputStream(backupFile));
-			fileInputStream = new ObjectInputStream(new FileInputStream(backupFile));
+			this.fileInputStream = new ObjectInputStream(inputStream);
+			this.fileOutputStream = new ObjectOutputStream(outputStream);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
 	}
 
 	public void printUserOfferStatus() {
@@ -35,7 +31,7 @@ public class Shop {
 		offerDataKeeper.setProductId(newProductId);
 		userOffer.updateData(offerDataKeeper);
 	}
-	
+
 	public void updateOfferComment(String newComment) {
 		offerDataKeeper.setComment(newComment);
 		userOffer.updateData(offerDataKeeper);
@@ -63,7 +59,7 @@ public class Shop {
 		}
 		if (dataKeeper != null) {
 			System.out.println(" offer was rollbacked with following data " + dataKeeper);
-			this.offerDataKeeper= dataKeeper;
+			this.offerDataKeeper = dataKeeper;
 			userOffer.updateData(dataKeeper);
 		}
 	}

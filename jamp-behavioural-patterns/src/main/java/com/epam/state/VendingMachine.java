@@ -30,45 +30,38 @@ public class VendingMachine {
 	public Goods buyGoods(String goodsIdentifier, int money) {
 		Goods goodsByIdentifier = getGoodsByIdentifier(goodsIdentifier);
 		if (goodsByIdentifier == null) {
-			System.out.println("no such goods " + goodsIdentifier);
+			System.out.println("No such goods " + goodsIdentifier);
 			return null;
 		}
 
 		int cost = goodsByIdentifier.getCost();
+		int rest = ((money - cost)>0)?money - cost:0;
 		Integer countOfGoods = goods.get(goodsByIdentifier);
-
-		if (money < cost) {
-			machineState = STATE_REJECT_NOT_ENOUGH_MONEY;
-			machineState.giveGoodsToCustomer(goodsByIdentifier, -1);
-			return null;
-		}
 
 		if (countOfGoods < 1) {
 			machineState = STATE_NO_SUCH_PRODUCT;
-			machineState.giveGoodsToCustomer(goodsByIdentifier, -1);
-			return null;
 		}
-
-		if (money > cost) {
-			int rest = money - cost;
+		if (money < cost) {
+			machineState = STATE_REJECT_NOT_ENOUGH_MONEY;
+		}else if (money > cost) {
 			if (rest > bank) {
 				machineState = STATE_NOT_ENOUGH_MONEY_TO_GIVE_REST;
-				machineState.giveGoodsToCustomer(goodsByIdentifier, rest);
-				return null;
 			} else {
 				machineState = STATE_GIVE_GOODS_AND_REST;
-				machineState.giveGoodsToCustomer(goodsByIdentifier, rest);
-				decreaseGoodsCount(goodsByIdentifier);
-				bank += money;
-				bank -= rest;
-				return goodsByIdentifier;
 			}
 		} else {
 			machineState = STATE_GIVE_GOODS_WITHOUT_REST;
-			machineState.giveGoodsToCustomer(goodsByIdentifier, -1);
+		}
+		
+		
+		boolean goodsWasGivenToCustomer = machineState.giveGoodsToCustomer(goodsByIdentifier, rest);
+		if(goodsWasGivenToCustomer){
 			decreaseGoodsCount(goodsByIdentifier);
 			bank += money;
+			bank -= rest;
 			return goodsByIdentifier;
+		}else{
+			return null;
 		}
 	}
 

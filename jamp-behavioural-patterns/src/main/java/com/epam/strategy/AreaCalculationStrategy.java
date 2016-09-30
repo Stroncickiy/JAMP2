@@ -2,6 +2,6 @@ package com.epam.strategy;
 
 public interface AreaCalculationStrategy {
 
-	double calculateArea(int... data);
+	double calculateArea(Triangle triangle); 
 
 }

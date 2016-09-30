@@ -11,21 +11,27 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
-public class MentorshipPhase   {
+public class MentorshipPhase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
 	private String location;
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 	@OneToMany
 	private List<PhaseParticipantAssignment> participants;
 	@OneToMany
 	private List<MentorshipGroup> groups;
+	@OneToMany
+	private List<Lecture> lectures;
 
 	public String getTitle() {
 		return title;
@@ -67,12 +73,28 @@ public class MentorshipPhase   {
 		this.id = id;
 	}
 
+	public List<MentorshipGroup> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<MentorshipGroup> groups) {
+		this.groups = groups;
+	}
+
 	public List<PhaseParticipantAssignment> getParticipants() {
 		return participants;
 	}
 
 	public void setParticipants(List<PhaseParticipantAssignment> participants) {
 		this.participants = participants;
+	}
+
+	public List<Lecture> getLectures() {
+		return lectures;
+	}
+
+	public void setLectures(List<Lecture> lectures) {
+		this.lectures = lectures;
 	}
 
 }

@@ -1,8 +1,4 @@
 package com.epam.spring.controller;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,15 +53,11 @@ public class AuthController {
 
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
 	public String createUser(@ModelAttribute("newUser") User user) {
-		List<UserRole> roles = new ArrayList<>();
-		if (user.getRoles() != null) {
-			roles.addAll(user.getRoles());
-		}
-		user.setRoles(roles);
-		user.setBirthDate(new Date());
-		user.setEnabled(true);
+		user.setRoles(user.getRoles());
+		user.setBirthDate(user.getBirthDate());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		userService.register(user);
+		user.setEnabled(true);
+		userService.add(user);
 		return "redirect:/";
 	}
 

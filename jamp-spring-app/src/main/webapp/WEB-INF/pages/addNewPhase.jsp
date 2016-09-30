@@ -12,17 +12,18 @@
 </head>
 <body>
 	<%@ include file="head.jsp"%>
-	<h1>Edit users</h1>
+	<h1>Add new Phase</h1>
 	<div id="content">
-		<form:form action="${pageContext.request.contextPath}/users/edit"
-			commandName="userToEdit" method="post">
-			<form:hidden path="id"></form:hidden>
-			<form:label path="firstName">FirstName</form:label>
-			<form:input path="firstName"></form:input>
-			<form:label path="lastName">LastName</form:label>
-			<form:input path="lastName"></form:input>
-			<form:label path="birthDate">Birthday yyyy-MM-dd</form:label>
-			<form:input path="birthDate"></form:input>
+		<form:form action="${pageContext.request.contextPath}/phases/add"
+			commandName="phaseToAdd" method="post">
+			<form:label path="title">Title</form:label>
+			<form:input path="title"></form:input>
+			<form:label path="location">Location</form:label>
+			<form:input path="location"></form:input>
+			<form:label path="startDate"> Start yyyy-MM-dd</form:label>
+			<form:input path="startDate"></form:input>
+			<form:label path="endDate"> End yyyy-MM-dd</form:label>
+			<form:input path="endDate"></form:input>
 			<form:button type="submit">Save</form:button>
 		</form:form>
 		<c:if test="${validationErrors != null}">

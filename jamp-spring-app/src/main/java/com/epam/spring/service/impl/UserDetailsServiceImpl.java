@@ -25,17 +25,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserService userSerivice;
 
+
 	@Override
-    public UserDetails loadUserByUsername(final String email)
-            throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
 
-    	User user = userSerivice.getUserByEmail(email);
-        List<GrantedAuthority> authorities =
-                buildUserAuthority(user.getRoles());
+		User user = userSerivice.getUserByEmail(email);
+		List<GrantedAuthority> authorities = buildUserAuthority(user.getRoles());
 
-        return buildUserForAuthentication(user, authorities);
+		return buildUserForAuthentication(user, authorities);
 
-    }
+	}
 
 	private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user,
 			List<GrantedAuthority> authorities) {

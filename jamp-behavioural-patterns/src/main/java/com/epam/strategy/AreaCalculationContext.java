@@ -7,7 +7,7 @@ public class AreaCalculationContext {
 		this.areaCalculationStrategy = strategy;
 	}
 
-	public double calculateAreaOfTriangle(int... data) {
-		return areaCalculationStrategy.calculateArea(data);
+	public double calculateAreaOfTriangle(Triangle triangle) {
+		return areaCalculationStrategy.calculateArea(triangle);
 	}
 }

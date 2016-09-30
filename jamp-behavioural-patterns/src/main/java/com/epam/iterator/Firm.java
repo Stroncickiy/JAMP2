@@ -37,6 +37,19 @@ public class Firm implements Iterator<Department>, Iterable<Department> {
 	}
 
 	@Override
+	public void remove() {
+		if (currentDepartment != null) {
+			if (currentDepartment.equals(hrDepartment)) {
+				hrDepartment = null;
+			} else if (currentDepartment.equals(itDepartment)) {
+				itDepartment = null;
+			} else if (currentDepartment.equals(serviceStuffDepartment)) {
+				serviceStuffDepartment = null;
+			}
+		}
+	}
+
+	@Override
 	public String toString() {
 		return "Firm [name=" + name + "]";
 	}
