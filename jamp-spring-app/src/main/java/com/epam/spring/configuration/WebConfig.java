@@ -4,12 +4,14 @@ import java.util.concurrent.Executor;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -27,7 +29,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.epam.spring.converter.LocalDateConverter;
+import com.epam.spring.converter.ParticipantConverter;
 
 @SpringBootApplication
 @EnableAutoConfiguration
@@ -43,15 +45,29 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Value("${dateFormat}")
 	private String dateFormat;
 
+	@Autowired
+	private ApplicationContext context;
+
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
-		registry.addConverter(new LocalDateConverter(dateFormat));
+		registry.addConverter(context.getBean(ParticipantConverter.class));
+		// converterAutoscanner(registry);
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
 	}
+
+	/*
+	 * @SuppressWarnings("rawtypes") private void
+	 * converterAutoscanner(FormatterRegistry formatterRegistry) { Reflections
+	 * reflections = new Reflections("com.epam.spring.converter"); Set<Class<?
+	 * extends Converter>> allClasses =
+	 * reflections.getSubTypesOf(Converter.class); allClasses.forEach(s -> { try
+	 * { formatterRegistry.addConverter(s.newInstance()); } catch (Exception e)
+	 * { e.printStackTrace(); } }); }
+	 */
 
 	@Bean
 	public ViewResolver viewResolver() {

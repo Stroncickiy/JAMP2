@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Lecture {
 	@Id
@@ -20,8 +22,10 @@ public class Lecture {
 	private String topic;
 	@OneToOne
 	private PhaseParticipantAssignment lector;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
 	@ManyToOne

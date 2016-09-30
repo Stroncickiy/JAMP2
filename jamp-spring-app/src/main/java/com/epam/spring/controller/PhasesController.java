@@ -21,7 +21,7 @@ public class PhasesController {
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ModelAndView showAllPhases(ModelAndView modelAndView) {
-		modelAndView.setViewName("allPhases");
+		modelAndView.setViewName("phases");
 		modelAndView.addObject("phases", mentorshipPhaseService.getAll());
 		return modelAndView;
 

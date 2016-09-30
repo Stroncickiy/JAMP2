@@ -26,11 +26,11 @@ public class MentorshipPhase {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
-	@OneToMany
+	@OneToMany(mappedBy = "phase")
 	private List<PhaseParticipantAssignment> participants;
-	@OneToMany
+	@OneToMany(mappedBy = "phase")
 	private List<MentorshipGroup> groups;
-	@OneToMany
+	@OneToMany(mappedBy = "phase")
 	private List<Lecture> lectures;
 
 	public String getTitle() {

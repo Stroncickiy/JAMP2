@@ -17,15 +17,14 @@ public class MentorshipPhaseServiceImpl implements MentorshipPhaseService {
 	@Autowired
 	private MentorshipPhaseDAO mentorshipPhaseDAO;
 
-
 	@Override
 	public MentorshipPhase add(MentorshipPhase O) {
 		return mentorshipPhaseDAO.add(O);
 	}
 
 	@Override
-	public void remove(MentorshipPhase item) {
-		mentorshipPhaseDAO.remove(item);
+	public boolean remove(MentorshipPhase item) {
+		return mentorshipPhaseDAO.remove(item);
 
 	}
 
@@ -40,8 +39,14 @@ public class MentorshipPhaseServiceImpl implements MentorshipPhaseService {
 	}
 
 	@Override
-	public void update(MentorshipPhase item) {
-		mentorshipPhaseDAO.update(item);
+	public boolean update(MentorshipPhase item) {
+		return mentorshipPhaseDAO.update(item);
+	}
+
+	@Override
+	public void refresh(MentorshipPhase item) {
+		mentorshipPhaseDAO.refresh(item);
+
 	}
 
 }

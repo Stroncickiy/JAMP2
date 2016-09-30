@@ -3,13 +3,15 @@ package com.epam.spring.service;
 import java.util.List;
 
 public interface CommonService<O> {
-	O add(O O);
+	void refresh(O item);
 
-	void remove(O item);
+	O add(O item);
+
+	boolean remove(O item);
 
 	O getById(Long id);
 
 	List<O> getAll();
 
-	void update(O item);
+	boolean update(O item);
 }

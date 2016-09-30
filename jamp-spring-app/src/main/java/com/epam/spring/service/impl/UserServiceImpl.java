@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
 		return userDAO.add(user);
 	}
 
-	public void remove(User user) {
-		userDAO.remove(user);
+	public boolean remove(User user) {
+		return userDAO.remove(user);
 	}
 
 	public User getById(long id) {
@@ -35,8 +35,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(User user) {
-		userDAO.update(user);
+	public boolean update(User user) {
+		return userDAO.update(user);
 	}
 
 	@Override
@@ -47,6 +47,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getById(Long id) {
 		return userDAO.getById(id);
+	}
+
+	@Override
+	public void refresh(User item) {
+		userDAO.refresh(item);
+
 	}
 
 }

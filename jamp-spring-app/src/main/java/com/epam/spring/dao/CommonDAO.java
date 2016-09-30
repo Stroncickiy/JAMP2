@@ -13,4 +13,5 @@ public interface CommonDAO<O> {
 	List<O> getAll();
 
 	O getById(Long key);
+	void refresh(O item);
 }

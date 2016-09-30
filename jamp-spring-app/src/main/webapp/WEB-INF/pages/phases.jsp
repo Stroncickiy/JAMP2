@@ -40,7 +40,7 @@
 						<td><a
 							href="${pageContext.request.contextPath}/participants/${phase.id}">${phase.participants.size()}</a></td>
 						<td><a
-							href="${pageContext.request.contextPath}/lectrues/${phase.id}">${phase.lectures.size()}</a></td>
+							href="${pageContext.request.contextPath}/lectures/${phase.id}">${phase.lectures.size()}</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

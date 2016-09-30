@@ -58,4 +58,9 @@ public abstract class CommonDAOImpl<O> implements CommonDAO<O> {
 		return (O) entityManager.find(getTargetClass(), key);
 	}
 
+	public void refresh(O item) {
+		entityManager.refresh(item);
+
+	}
+
 }
