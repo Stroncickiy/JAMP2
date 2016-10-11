@@ -1,11 +1,10 @@
 package com.epam.spring.dao.impl;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.stereotype.Repository;
-
 import com.epam.spring.dao.MentorshipPhaseDAO;
 import com.epam.spring.model.MentorshipPhase;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.PostConstruct;
 
 @Repository
 public class MentorshipPhaseDAOImpl extends CommonDAOImpl<MentorshipPhase> implements MentorshipPhaseDAO {

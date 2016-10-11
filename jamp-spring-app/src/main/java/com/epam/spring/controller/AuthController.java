@@ -1,6 +1,8 @@
 package com.epam.spring.controller;
-import javax.annotation.PostConstruct;
 
+import com.epam.spring.enums.UserRole;
+import com.epam.spring.model.User;
+import com.epam.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,9 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.epam.spring.app.enums.UserRole;
-import com.epam.spring.model.User;
-import com.epam.spring.service.UserService;
+import javax.annotation.PostConstruct;
 
 @Controller
 public class AuthController {

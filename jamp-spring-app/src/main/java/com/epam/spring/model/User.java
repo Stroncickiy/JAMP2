@@ -1,23 +1,11 @@
 package com.epam.spring.model;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import com.epam.spring.enums.UserRole;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.epam.spring.app.enums.UserRole;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User {
@@ -41,7 +29,7 @@ public class User {
 	@ElementCollection(targetClass = UserRole.class)
 	private List<UserRole> roles;
 	@OneToMany
-	private List<PhaseParticipantAssignment> assignments;
+	private List<ParticipantAssignment> assignments;
 	@OneToOne
 	private User lastUpdatedBy;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -139,11 +127,11 @@ public class User {
 		this.roles = roles;
 	}
 
-	public List<PhaseParticipantAssignment> getAssignments() {
+	public List<ParticipantAssignment> getAssignments() {
 		return assignments;
 	}
 
-	public void setAssignments(List<PhaseParticipantAssignment> assignments) {
+	public void setAssignments(List<ParticipantAssignment> assignments) {
 		this.assignments = assignments;
 	}
 

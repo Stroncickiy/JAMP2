@@ -10,19 +10,29 @@
 </head>
 <body>
 	<%@ include file="head.jsp"%>
-	<h1>All Groups Of Phase ${targetPhase.title}</h1>
+	<h1>All Groups Of Phase: ${targetMentorshipPhase.title}</h1>
 	<div id="content">
-		<a href="${pageContext.request.contextPath}/groups/add">Add new	Group</a>
+		<a href="${pageContext.request.contextPath}/groups/add/${targetMentorshipPhase.id}">Add new Group</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>id</th>
+					<th>Mentor</th>
+					<th>Mentee</th>
+					<th>Planned Start</th>
+					<th>Planned End</th>
+					<th>Status</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${groups}" var="group">
 					<tr>
 						<td>${group.id}</td>
+						<td>${group.mentor.assignee.fullName}</td>
+						<td>${group.mentee.assignee.fullName}</td>
+						<td>${group.plannedStart}</td>
+						<td>${group.plannedEnd}</td>
+						<td>${group.status}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

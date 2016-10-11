@@ -1,13 +1,12 @@
 package com.epam.spring.validator;
 
 import com.epam.spring.model.User;
-
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import java.util.Date;
 
 @Component
 public class UserValidator implements Validator {

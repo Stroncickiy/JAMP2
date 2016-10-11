@@ -1,18 +1,12 @@
 package com.epam.spring.model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import com.epam.spring.app.enums.ParticipantRole;
+import com.epam.spring.enums.ParticipantRole;
 import com.epam.spring.enums.ParticipantStatus;
 
+import javax.persistence.*;
+
 @Entity
-public class PhaseParticipantAssignment {
+public class ParticipantAssignment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

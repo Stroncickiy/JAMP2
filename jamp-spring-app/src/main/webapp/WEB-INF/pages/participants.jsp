@@ -10,20 +10,36 @@
 </head>
 <body>
 	<%@ include file="head.jsp"%>
-	<h1>All Participants Of Phase ${targetPhase.title}</h1>
+	<h1>All Participants Of Phase: <b>${targetMentorshipPhase.title}</b></h1>
 	<div id="content">
-		<a href="${pageContext.request.contextPath}/participants/add">Add
+		<a href="${pageContext.request.contextPath}/participants/add/${targetMentorshipPhase.id}">Add
 			new Participant</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>id</th>
+					<th>Email</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Birth Date</th>
+					<th>Level</th>
+					<th>Skill</th>
+					<th>Role</th>
+					<th>Status</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${participants}" var="participant">
 					<tr>
 						<td>${participant.id}</td>
+						<td>${participant.assignee.email}</td>
+						<td>${participant.assignee.firstName}</td>
+						<td>${participant.assignee.lastName}</td>
+						<td>${participant.assignee.birthDate}</td>
+						<td>${participant.assignee.level}</td>
+						<td>${participant.assignee.primarySkill}</td>
+						<td>${participant.role}</td>
+						<td>${participant.status}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

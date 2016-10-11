@@ -1,15 +1,13 @@
 package com.epam.spring.dao.impl;
 
-import java.util.Iterator;
-
-import javax.annotation.PostConstruct;
-
+import com.epam.spring.dao.UserDAO;
+import com.epam.spring.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.epam.spring.dao.UserDAO;
-import com.epam.spring.model.User;
+import javax.annotation.PostConstruct;
+import java.util.Iterator;
 
 @Repository
 public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {

@@ -1,14 +1,12 @@
 package com.epam.spring.dao.impl;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
+import com.epam.spring.dao.CommonDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.epam.spring.dao.CommonDAO;
+import javax.persistence.EntityManager;
+import java.util.List;
 
 public abstract class CommonDAOImpl<O> implements CommonDAO<O> {
 

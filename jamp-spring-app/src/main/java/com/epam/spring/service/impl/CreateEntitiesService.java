@@ -1,28 +1,26 @@
 package com.epam.spring.service.impl;
 
-import java.time.LocalDate;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-
-import javax.annotation.PostConstruct;
-
+import com.epam.spring.enums.ParticipantRole;
+import com.epam.spring.enums.ParticipantStatus;
+import com.epam.spring.enums.UserRole;
+import com.epam.spring.model.Lecture;
+import com.epam.spring.model.MentorshipPhase;
+import com.epam.spring.model.ParticipantAssignment;
+import com.epam.spring.model.User;
+import com.epam.spring.service.LectureService;
+import com.epam.spring.service.MentorshipPhaseService;
+import com.epam.spring.service.ParticipantService;
+import com.epam.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.epam.spring.app.enums.ParticipantRole;
-import com.epam.spring.app.enums.UserRole;
-import com.epam.spring.enums.ParticipantStatus;
-import com.epam.spring.model.Lecture;
-import com.epam.spring.model.MentorshipPhase;
-import com.epam.spring.model.PhaseParticipantAssignment;
-import com.epam.spring.model.User;
-import com.epam.spring.service.LectureService;
-import com.epam.spring.service.MentorshipPhaseParticipantService;
-import com.epam.spring.service.MentorshipPhaseService;
-import com.epam.spring.service.UserService;
+import javax.annotation.PostConstruct;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class CreateEntitiesService {
@@ -31,7 +29,7 @@ public class CreateEntitiesService {
 	@Autowired
 	private UserService userSerivice;
 	@Autowired
-	private MentorshipPhaseParticipantService participantService;
+	private ParticipantService participantService;
 	@Autowired
 	private LectureService lectureService;
 
@@ -101,7 +99,7 @@ public class CreateEntitiesService {
 		phpMentorshipPhase = mentorshipPhaseService.add(phpMentorshipPhase);
 
 		// Participants
-		PhaseParticipantAssignment javaLector = new PhaseParticipantAssignment();
+		ParticipantAssignment javaLector = new ParticipantAssignment();
 		javaLector.setAssignee(clientVasya);
 		javaLector.setPhase(javaMentorshipPhase);
 		javaLector.setRole(ParticipantRole.LECTOR);

@@ -1,17 +1,10 @@
 package com.epam.spring.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class MentorshipPhase {
@@ -27,7 +20,7 @@ public class MentorshipPhase {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 	@OneToMany(mappedBy = "phase")
-	private List<PhaseParticipantAssignment> participants;
+	private List<ParticipantAssignment> participants;
 	@OneToMany(mappedBy = "phase")
 	private List<MentorshipGroup> groups;
 	@OneToMany(mappedBy = "phase")
@@ -81,11 +74,11 @@ public class MentorshipPhase {
 		this.groups = groups;
 	}
 
-	public List<PhaseParticipantAssignment> getParticipants() {
+	public List<ParticipantAssignment> getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(List<PhaseParticipantAssignment> participants) {
+	public void setParticipants(List<ParticipantAssignment> participants) {
 		this.participants = participants;
 	}
 

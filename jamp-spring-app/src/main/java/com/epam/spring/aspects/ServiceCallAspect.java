@@ -1,7 +1,7 @@
 package com.epam.spring.aspects;
 
-import java.util.Date;
-
+import com.epam.spring.model.User;
+import com.epam.spring.service.UserService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -10,8 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.epam.spring.model.User;
-import com.epam.spring.service.UserService;
+import java.util.Date;
 
 @Aspect
 @Component

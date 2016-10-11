@@ -1,5 +1,10 @@
 package com.epam.spring.controller;
 
+import com.epam.spring.model.Lecture;
+import com.epam.spring.model.MentorshipPhase;
+import com.epam.spring.service.LectureService;
+import com.epam.spring.service.MentorshipPhaseService;
+import com.epam.spring.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.epam.spring.model.Lecture;
-import com.epam.spring.model.MentorshipPhase;
-import com.epam.spring.service.LectureService;
-import com.epam.spring.service.MentorshipPhaseParticipantService;
-import com.epam.spring.service.MentorshipPhaseService;
-
 @Controller
 @RequestMapping("/lectures")
 public class LectureController {
@@ -25,7 +24,7 @@ public class LectureController {
 	@Autowired
 	private MentorshipPhaseService phaseService;
 	@Autowired
-	private MentorshipPhaseParticipantService participantsService;
+	private ParticipantService participantsService;
 
 	@RequestMapping(value = "/{phaseId}", method = RequestMethod.GET)
 	public ModelAndView showLecturesOfPhase(ModelAndView modelAndView, @PathVariable("phaseId") Long phaseId) {

@@ -1,9 +1,9 @@
 package com.epam.spring.configuration;
 
-import java.util.concurrent.Executor;
-
-import javax.sql.DataSource;
-
+import com.epam.spring.converter.ParticipantConverter;
+import com.epam.spring.converter.ParticipantRoleConverter;
+import com.epam.spring.converter.ParticipantStatusConverter;
+import com.epam.spring.converter.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,11 +12,7 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.annotation.*;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -29,7 +25,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.epam.spring.converter.ParticipantConverter;
+import javax.sql.DataSource;
+import java.util.concurrent.Executor;
 
 @SpringBootApplication
 @EnableAutoConfiguration
@@ -51,6 +48,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(context.getBean(ParticipantConverter.class));
+		registry.addConverter(new ParticipantRoleConverter());
+        registry.addConverter(new ParticipantStatusConverter());
+        registry.addConverter(context.getBean(UserConverter.class));
 		// converterAutoscanner(registry);
 	}
 

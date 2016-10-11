@@ -1,17 +1,9 @@
 package com.epam.spring.model;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Lecture {
@@ -21,7 +13,7 @@ public class Lecture {
 	private String domainArea;
 	private String topic;
 	@OneToOne
-	private PhaseParticipantAssignment lector;
+	private ParticipantAssignment lector;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;
@@ -55,11 +47,11 @@ public class Lecture {
 		this.topic = topic;
 	}
 
-	public PhaseParticipantAssignment getLector() {
+	public ParticipantAssignment getLector() {
 		return lector;
 	}
 
-	public void setLector(PhaseParticipantAssignment lector) {
+	public void setLector(ParticipantAssignment lector) {
 		this.lector = lector;
 	}
 
