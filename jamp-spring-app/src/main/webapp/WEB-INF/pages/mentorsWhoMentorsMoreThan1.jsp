@@ -10,11 +10,8 @@
 </head>
 <body>
 	<%@ include file="head.jsp"%>
-	<h1>All Participants Of Phase: <b>${targetMentorshipPhase.title}</b></h1>
+	<h1> Mentors who mentors more than one mentee</h1>
 	<div id="content">
-		<a href="${pageContext.request.contextPath}/participants/add/${targetMentorshipPhase.id}">Add
-			new Participant</a>
-		<a href="${pageContext.request.contextPath}/participants/mentorsMoreThan1">Mentors who mentors more than 1 mentee</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -30,17 +27,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${participants}" var="participant">
+				<c:forEach items="${mentors}" var="mentor">
 					<tr>
-						<td>${participant.id}</td>
-						<td>${participant.assignee.email}</td>
-						<td>${participant.assignee.firstName}</td>
-						<td>${participant.assignee.lastName}</td>
-						<td>${participant.assignee.birthDate}</td>
-						<td>${participant.assignee.level}</td>
-						<td>${participant.assignee.primarySkill}</td>
-						<td>${participant.role}</td>
-						<td>${participant.status}</td>
+						<td>${mentor.id}</td>
+						<td>${mentor.assignee.email}</td>
+						<td>${mentor.assignee.firstName}</td>
+						<td>${mentor.assignee.lastName}</td>
+						<td>${mentor.assignee.birthDate}</td>
+						<td>${mentor.assignee.level}</td>
+						<td>${mentor.assignee.primarySkill}</td>
+						<td>${mentor.role}</td>
+						<td>${mentor.status}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

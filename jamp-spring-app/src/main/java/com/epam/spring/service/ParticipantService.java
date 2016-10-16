@@ -13,4 +13,6 @@ public interface ParticipantService extends CommonService<ParticipantAssignment>
     List<ParticipantAssignment> getParticipantsForPhase(MentorshipPhase phase);
 
     List<ParticipantAssignment>  getParticipantsForPhaseByRole(MentorshipPhase phase,ParticipantRole role);
+
+
 }

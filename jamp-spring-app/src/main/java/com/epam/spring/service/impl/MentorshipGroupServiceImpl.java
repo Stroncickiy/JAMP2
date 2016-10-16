@@ -3,6 +3,7 @@ package com.epam.spring.service.impl;
 import com.epam.spring.dao.MentorshipGroupDAO;
 import com.epam.spring.model.MentorshipGroup;
 import com.epam.spring.model.MentorshipPhase;
+import com.epam.spring.model.ParticipantAssignment;
 import com.epam.spring.service.MentorshipGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,10 @@ public class MentorshipGroupServiceImpl implements MentorshipGroupService {
 	@Override
 	public List<MentorshipGroup> getForPhase(MentorshipPhase targetMentorshipPhase) {
 		return groupDao.getForPhase(targetMentorshipPhase);
+	}
+
+	@Override
+	public List<ParticipantAssignment> getMentorsWhoMentorsMoreThanTwoMentees() {
+		return groupDao.getMentorsWhoMentorsMoreThanTwoMentees();
 	}
 }

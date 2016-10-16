@@ -40,4 +40,6 @@ public class ParticipantDAOImpl extends CommonDAOImpl<ParticipantAssignment>
         findLectorsForPhase.setParameter("targetPhase", phase);
         return findLectorsForPhase.list();
     }
+
+
 }

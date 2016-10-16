@@ -4,6 +4,7 @@ import com.epam.spring.enums.ParticipantRole;
 import com.epam.spring.enums.ParticipantStatus;
 import com.epam.spring.model.MentorshipPhase;
 import com.epam.spring.model.ParticipantAssignment;
+import com.epam.spring.service.MentorshipGroupService;
 import com.epam.spring.service.MentorshipPhaseService;
 import com.epam.spring.service.ParticipantService;
 import com.epam.spring.service.UserService;
@@ -18,12 +19,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/participants")
 public class ParticipantsController {
     @Autowired
     private ParticipantService participantsService;
-
+    @Autowired
+    private MentorshipGroupService mentorshipGroupService;
     @Autowired
     private UserService userService;
 
@@ -39,6 +43,19 @@ public class ParticipantsController {
         return modelAndView;
 
     }
+
+    @RequestMapping(value = "/mentorsMoreThan1", method = RequestMethod.GET)
+    public ModelAndView showMentorsWhoMentorsMoreThan1Mentee(ModelAndView modelAndView) {
+        modelAndView.setViewName("mentorsWhoMentorsMoreThan1");
+        List<ParticipantAssignment> mentorsWhoMentorsMoreThanTwoMentees = mentorshipGroupService.getMentorsWhoMentorsMoreThanTwoMentees();
+        modelAndView.addObject("mentors", mentorsWhoMentorsMoreThanTwoMentees);
+        return modelAndView;
+
+    }
+
+
+
+
 
     @RequestMapping(value = "/add/{phaseId}", method = RequestMethod.GET)
     public ModelAndView addNewParticipantPage(ModelAndView modelAndView, @PathVariable("phaseId") Long phaseId) {

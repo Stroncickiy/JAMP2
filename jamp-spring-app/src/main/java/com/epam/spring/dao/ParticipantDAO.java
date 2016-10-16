@@ -13,4 +13,6 @@ public interface ParticipantDAO extends CommonDAO<ParticipantAssignment> {
                                                              ParticipantStatus status);
 
 	List<ParticipantAssignment> getParticipantsOfPhase(MentorshipPhase phase);
+
+
 }
