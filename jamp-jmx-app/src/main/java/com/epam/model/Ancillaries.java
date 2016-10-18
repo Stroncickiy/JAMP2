@@ -1,16 +1,17 @@
 package com.epam.model;
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Ancillaries {
-    private List<Ancillaries> availableAncillaries;
+public class Ancillaries implements Serializable {
+    private List<Ancillary> availableAncillaries;
 
-    public List<Ancillaries> getAvailableAncillaries() {
+    public List<Ancillary> getAvailableAncillaries() {
         return availableAncillaries;
     }
 
-    public void setAvailableAncillaries(List<Ancillaries> availableAncillaries) {
+    public void setAvailableAncillaries(List<Ancillary> availableAncillaries) {
         this.availableAncillaries = availableAncillaries;
     }
 }

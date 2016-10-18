@@ -1,10 +1,11 @@
 package com.epam.model;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Ticket {
+public class Ticket implements Serializable {
     private List<User> passengers;
     private String departureAirport;
     private String arrivalAirport;

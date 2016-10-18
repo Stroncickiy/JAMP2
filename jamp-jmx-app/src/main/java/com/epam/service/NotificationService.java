@@ -1,10 +1,18 @@
 package com.epam.service;
 
 
+import com.epam.jms.Broker;
 import com.epam.model.User;
 
-public class NotificationService {
+public class NotificationService  implements  Runnable{
 
+
+    private Broker broker;
+
+    public NotificationService(Broker broker) {
+
+        this.broker = broker;
+    }
 
     private void subscribeUser(User user) {
         // TODO send subscription message to topic
@@ -16,4 +24,8 @@ public class NotificationService {
     }
 
 
+    @Override
+    public void run() {
+
+    }
 }

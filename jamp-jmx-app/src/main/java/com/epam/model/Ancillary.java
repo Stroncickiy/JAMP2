@@ -1,7 +1,9 @@
 package com.epam.model;
 
 
-public class Ancillary {
+import java.io.Serializable;
+
+public class Ancillary implements Serializable {
     private String name;
     private int cost;
 

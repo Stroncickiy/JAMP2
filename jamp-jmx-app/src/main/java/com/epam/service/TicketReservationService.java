@@ -1,12 +1,26 @@
 package com.epam.service;
 
 
+import com.epam.jms.Broker;
 import com.epam.model.*;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
 import java.util.List;
 
 public class TicketReservationService {
 
+
+    private Broker broker;
+
+
+    public TicketReservationService(Broker broker) {
+        this.broker = broker;
+
+
+    }
 
     public BookingInfo prepareBooking(Ticket ticket) {
         BookingInfo bookingInfo = new BookingInfo();
@@ -18,11 +32,14 @@ public class TicketReservationService {
 
     public void book(Ticket ticket) {
         Ticket bookedTicket = senRequestToBookingServiceViaJMS(ticket);
-        System.out.println(" Ticket " + ticket + " is booked");
-        List<User> passengers = ticket.getPassengers();
-        for (User passenger : passengers) {
-            sendSubscriptionRequestByJMX(passenger);
+        if (bookedTicket.isBooked()) {
+            System.out.format(" Ticket %s is booked", ticket);
+            List<User> passengers = ticket.getPassengers();
+            for (User passenger : passengers) {
+                sendSubscriptionRequestByJMX(passenger);
+            }
         }
+
     }
 
     private Ticket senRequestToBookingServiceViaJMS(Ticket ticket) {
@@ -49,6 +66,18 @@ public class TicketReservationService {
     }
 
     private Ancillaries callAncillaryServiceViaJMS(Ticket ticket) {
+        Session session = broker.obtainSession();
+        try {
+            MessageProducer producer = session.createProducer(broker.getAncillaryServiceDestination());
+            Message message = session.createObjectMessage(ticket);
+            message.setJMSReplyTo(broker.getAncillaryServiceResponseDestination());
+            producer.send(message);
+            session.commit();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+
+
         return null;
     }
 }

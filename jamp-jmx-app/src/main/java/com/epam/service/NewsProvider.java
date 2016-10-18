@@ -1,17 +1,20 @@
 package com.epam.service;
 
 
+import com.epam.jms.Broker;
 import com.epam.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsProvider {
+public class NewsProvider implements Runnable {
     private String topic;
+    private Broker broker;
     private List<User> subscribers = new ArrayList<>();
 
-    public NewsProvider(String topic) {
+    public NewsProvider(String topic, Broker broker) {
         this.topic = topic;
+        this.broker = broker;
     }
 
     private void registerUser(User userToRegister) {
@@ -30,5 +33,10 @@ public class NewsProvider {
         for (User subscriber : subscribers) {
             System.out.println(" news: " + news + " was sent to " + subscriber.getEmail());
         }
+    }
+
+    @Override
+    public void run() {
+        
     }
 }
