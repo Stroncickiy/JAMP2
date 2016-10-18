@@ -1,7 +1,9 @@
 package com.epam.model;
 
 
-public class BookingInfo {
+import java.io.Serializable;
+
+public class BookingInfo implements Serializable {
     private Ancillaries availableAncillaries;
     private LuggageAllowance luggageAllowance;
 

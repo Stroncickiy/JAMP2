@@ -12,7 +12,8 @@ public class Broker {
     private Destination luggageServiceDestination;
     private Destination luggageServiceResponseDestination;
     private Destination notificationServiceDestination;
-
+    private Destination bookingServiceDestination;
+    private Destination bookingServiceResponseDestination;
 
     public Broker() {
         connectionFactory = new ActiveMQConnectionFactory(
@@ -20,6 +21,10 @@ public class Broker {
 
         try {
             Session session = connectionFactory.createConnection().createSession(true, Session.SESSION_TRANSACTED);
+
+            bookingServiceDestination = session.createQueue("BOOKINGS_SERVICE_OUT_Q");
+            bookingServiceResponseDestination = session.createQueue("BOOKING_SERVICE_IN_Q");
+
             ancillaryServiceDestination = session.createQueue("ANCILLARY_SERVICE_OUT_Q");
             ancillaryServiceResponseDestination = session.createQueue("ANCILLARY_SERVICE_IN_Q");
 
@@ -95,5 +100,21 @@ public class Broker {
 
     public void setNotificationServiceDestination(Destination notificationServiceDestination) {
         this.notificationServiceDestination = notificationServiceDestination;
+    }
+
+    public Destination getBookingServiceDestination() {
+        return bookingServiceDestination;
+    }
+
+    public void setBookingServiceDestination(Destination bookingServiceDestination) {
+        this.bookingServiceDestination = bookingServiceDestination;
+    }
+
+    public Destination getBookingServiceResponseDestination() {
+        return bookingServiceResponseDestination;
+    }
+
+    public void setBookingServiceResponseDestination(Destination bookingServiceResponseDestination) {
+        this.bookingServiceResponseDestination = bookingServiceResponseDestination;
     }
 }

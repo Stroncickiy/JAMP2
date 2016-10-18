@@ -1,7 +1,9 @@
 package com.epam.model;
 
 
-public class LuggageAllowance {
+import java.io.Serializable;
+
+public class LuggageAllowance implements Serializable {
     private int kgAllowed;
     private int costOfKg;
 

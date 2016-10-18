@@ -1,6 +1,7 @@
 package com.epam.service;
 
 
+import com.epam.Application;
 import com.epam.jms.Broker;
 import com.epam.model.Ancillaries;
 import com.epam.model.Ticket;
@@ -19,12 +20,12 @@ public class AncillaryService implements Runnable {
     }
 
 
-    public void listenForRequests() {
+    private void listenForRequests() {
         Session session = broker.obtainSession();
         try {
             MessageConsumer consumer = session.createConsumer(broker.getAncillaryServiceDestination());
             Message message;
-            while (true) {
+            while (!Application.NEED_TO_STOP) {
                 if ((message = consumer.receive(2000l)) != null) {
                     if (message instanceof ObjectMessage) {
                         ObjectMessage objectMessage = (ObjectMessage) message;
@@ -39,7 +40,7 @@ public class AncillaryService implements Runnable {
                         }
                     }
                 } else {
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.MILLISECONDS.sleep(100);
                 }
 
             }
@@ -53,14 +54,15 @@ public class AncillaryService implements Runnable {
     }
 
     private Ancillaries getAvailableAncillaries(Ticket ticket) {
-
-
-        return null;
+        Ancillaries ancillaries = new Ancillaries();
+        //TODO ancillaries logic
+        return ancillaries;
     }
 
     @Override
     public void run() {
         System.out.printf("Ancillary Service Started And Waiting for Requests");
         listenForRequests();
+        System.out.printf("Ancillary Service Stopped");
     }
 }

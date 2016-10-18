@@ -36,32 +36,77 @@ public class TicketReservationService {
             System.out.format(" Ticket %s is booked", ticket);
             List<User> passengers = ticket.getPassengers();
             for (User passenger : passengers) {
-                sendSubscriptionRequestByJMX(passenger);
+                sendSubscriptionRequestViaJMX(passenger, "NEWS", "ADS");
             }
         }
 
     }
 
     private Ticket senRequestToBookingServiceViaJMS(Ticket ticket) {
-        return ticket;
+        Session session = broker.obtainSession();
+        try {
+            MessageProducer producer = session.createProducer(broker.getBookingServiceDestination());
+            Message message = session.createObjectMessage(ticket);
+            message.setJMSReplyTo(broker.getBookingServiceResponseDestination());
+            producer.send(message);
+            session.commit();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+
+
+        // TODO receive response
+        return null;
     }
 
     public void subscribeUserOnNews(User user) {
-        sendSubscriptionRequestByJMX(user);
+        sendSubscriptionRequestViaJMX(user);
     }
 
 
     public void unsubscribeUserFromNews(User user) {
-        sendUnsubscriptionRequestByJMX(user);
+        sendUnsubscriptionRequestViaJMX(user);
     }
 
-    private void sendSubscriptionRequestByJMX(User user) {
+    private void sendSubscriptionRequestViaJMX(User user, String... topics) {
+        Session session = broker.obtainSession();
+        try {
+            MessageProducer producer = session.createProducer(broker.getNotificationServiceDestination());
+            Message message = session.createObjectMessage(new SubscribeRQ(user, topics));
+            producer.send(message);
+            session.commit();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void sendUnsubscriptionRequestByJMX(User user) {
+    private void sendUnsubscriptionRequestViaJMX(User user, String... topics) {
+        Session session = broker.obtainSession();
+        try {
+            MessageProducer producer = session.createProducer(broker.getNotificationServiceDestination());
+            Message message = session.createObjectMessage(new UnsubscribeRQ(user, topics));
+            producer.send(message);
+            session.commit();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
     }
 
     private LuggageAllowance callLugageServiceViaJMS(Ticket ticket) {
+
+        Session session = broker.obtainSession();
+        try {
+            MessageProducer producer = session.createProducer(broker.getLuggageServiceDestination());
+            Message message = session.createObjectMessage(ticket);
+            message.setJMSReplyTo(broker.getLuggageServiceResponseDestination());
+            producer.send(message);
+            session.commit();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+
+
+        // TODO receive response
         return null;
     }
 
@@ -77,7 +122,7 @@ public class TicketReservationService {
             e.printStackTrace();
         }
 
-
+        // TODO receive response
         return null;
     }
 }

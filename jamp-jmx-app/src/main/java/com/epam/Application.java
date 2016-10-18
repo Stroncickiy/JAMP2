@@ -8,8 +8,9 @@ import com.epam.service.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Main {
-    private static ExecutorService executorService = Executors.newFixedThreadPool(5);
+public class Application {
+    public static boolean NEED_TO_STOP;
+    private static ExecutorService executorService = Executors.newFixedThreadPool(7);
 
     public static void main(String[] args) {
 
@@ -27,6 +28,7 @@ public class Main {
             ticketReservationService.unsubscribeUserFromNews(ticket.getPassengers().get(0));
             ticketReservationService.subscribeUserOnNews(ticket.getPassengers().get(0));
 
+            NEED_TO_STOP = true;
         }
 
     }
@@ -41,9 +43,10 @@ public class Main {
 
         executorService.execute(new AncillaryService(broker));
         executorService.execute(new LuggageService(broker));
-        executorService.execute(new NotificationService(broker));
-        executorService.execute(new NewsProvider("General News ", broker));
-        executorService.execute(new NewsProvider("Advertisements  ", broker));
+        executorService.execute(new BookingService(broker));
+
+        executorService.execute(new EmailService("ADS", broker));
+        executorService.execute(new EmailService("NEWS", broker));
 
         return broker;
     }
