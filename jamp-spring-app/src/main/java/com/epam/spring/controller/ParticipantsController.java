@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -54,9 +55,6 @@ public class ParticipantsController {
     }
 
 
-
-
-
     @RequestMapping(value = "/add/{phaseId}", method = RequestMethod.GET)
     public ModelAndView addNewParticipantPage(ModelAndView modelAndView, @PathVariable("phaseId") Long phaseId) {
 
@@ -68,14 +66,14 @@ public class ParticipantsController {
         MentorshipPhase phase = phaseService.getById(phaseId);
         ParticipantAssignment participantAssignment = new ParticipantAssignment();
         participantAssignment.setPhase(phase);
-        modelAndView.addObject("participantToAdd",participantAssignment );
+        modelAndView.addObject("participantToAdd", participantAssignment);
         return modelAndView;
 
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addNewParticipant(@ModelAttribute ParticipantAssignment participantAssignmentToAdd, BindingResult bindingResult,
-                                    Model model) {
+    public ModelAndView addNewParticipant(@Valid  @ModelAttribute ParticipantAssignment participantAssignmentToAdd, BindingResult bindingResult,
+                                          Model model) {
         ModelAndView modelAndView = new ModelAndView("addNewParticipant", model.asMap());
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("users", userService.getAll());
@@ -87,7 +85,44 @@ public class ParticipantsController {
             return modelAndView;
         }
         participantsService.add(participantAssignmentToAdd);
-        return new ModelAndView(new RedirectView("/participants/"+participantAssignmentToAdd.getPhase().getId()));
+        return new ModelAndView(new RedirectView("/participants/" + participantAssignmentToAdd.getPhase().getId()));
 
     }
+
+    @RequestMapping(value = "/remove/{assignmentId}", method = RequestMethod.GET)
+    public ModelAndView deleteLecture(@PathVariable("assignmentId") Long assignmentId) {
+        ParticipantAssignment assignmentToDelete = participantsService.getById(assignmentId);
+        participantsService.remove(assignmentToDelete);
+        return new ModelAndView(new RedirectView("/participants/" + assignmentToDelete.getPhase().getId()));
+    }
+
+    @RequestMapping(value = "/update/{particpantId}", method = RequestMethod.GET)
+    public ModelAndView updateParticipantPage(ModelAndView modelAndView, @PathVariable("particpantId") Long particpantId) {
+        modelAndView.addObject("users", userService.getAll());
+        modelAndView.addObject("roles", ParticipantRole.values());
+        modelAndView.addObject("statuses", ParticipantStatus.values());
+        modelAndView.setViewName("updateParticipant");
+        ParticipantAssignment participantAssignment = participantsService.getById(particpantId);
+        modelAndView.addObject("participantToUpdate", participantAssignment);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ModelAndView updateParticipant(@Valid @ModelAttribute ParticipantAssignment participantAssignmentToUpdate, BindingResult bindingResult,
+                                          Model model) {
+        ModelAndView modelAndView = new ModelAndView("updateParticipant", model.asMap());
+        if (bindingResult.hasErrors()) {
+            modelAndView.addObject("users", userService.getAll());
+            modelAndView.addObject("roles", ParticipantRole.values());
+            modelAndView.addObject("statuses", ParticipantStatus.values());
+            model.addAttribute("participantToUpdate", participantAssignmentToUpdate);
+            model.addAttribute("validationErrors", bindingResult.getAllErrors());
+            return modelAndView;
+        }
+        participantsService.update(participantAssignmentToUpdate);
+        return new ModelAndView(new RedirectView("/participants/" + participantAssignmentToUpdate.getPhase().getId()));
+
+    }
+
+
 }

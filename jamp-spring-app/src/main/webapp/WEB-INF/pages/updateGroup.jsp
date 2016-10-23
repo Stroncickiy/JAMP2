@@ -12,22 +12,24 @@
 </head>
 <body>
 <%@ include file="head.jsp" %>
-<h3 class="text-center">Add new Participant</h3>
-<div id="shell">
+<h3 class="text-center">Update Group</h3>
+<div>
     <div id="main">
-        <form:form action="${pageContext.request.contextPath}/participants/add"
-                   commandName="participantToAdd" method="post">
+        <form:form action="${pageContext.request.contextPath}/groups/update/"
+                   commandName="groupToUpdate" method="post">
+            <form:hidden path="id"></form:hidden>
             <form:hidden path="phase.id"/>
+
             <div class="input-group input-md">
-                <form:label cssClass="input-group-addon" path="assignee">Assignee</form:label>
-                <form:select cssClass="form-control" required="required" path="assignee">
-                    <form:options items="${users}" itemValue="id" itemLabel="fullName"/>
+                <form:label cssClass="input-group-addon" path="mentor">Mentor</form:label>
+                <form:select cssClass="form-control" required="required" path="mentor">
+                    <form:options items="${mentors}" itemValue="id" itemLabel="assignee.fullName"/>
                 </form:select>
             </div>
             <div class="input-group input-md">
-                <form:label cssClass="input-group-addon" path="role">Role</form:label>
-                <form:select cssClass="form-control" required="required" path="role">
-                    <form:options items="${roles}" itemValue="title"/>
+                <form:label cssClass="input-group-addon" path="mentee">Mentee</form:label>
+                <form:select cssClass="form-control" required="required" path="mentee">
+                    <form:options items="${mentees}" itemValue="id" itemLabel="assignee.fullName"/>
                 </form:select>
             </div>
             <div class="input-group input-md">
@@ -35,6 +37,15 @@
                 <form:select cssClass="form-control" required="required" path="status">
                     <form:options items="${statuses}" itemValue="title"/>
                 </form:select>
+            </div>
+            <div class="input-group input-md">
+                <form:label cssClass="input-group-addon"
+                            path="plannedStart">Planned Start Date [yyyy-MM-dd]</form:label>
+                <form:input cssClass="form-control" required="required" path="plannedStart"></form:input>
+            </div>
+            <div class="input-group input-md">
+                <form:label cssClass="input-group-addon" path="plannedEnd">Planned End Date [yyyy-MM-dd]</form:label>
+                <form:input cssClass="form-control" required="required" path="plannedEnd"></form:input>
             </div>
             <form:button type="submit" class="btn right">Save</form:button>
         </form:form>

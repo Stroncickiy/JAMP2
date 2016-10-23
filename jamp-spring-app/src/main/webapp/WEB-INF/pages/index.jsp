@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 <head>
@@ -10,9 +12,11 @@
 </head>
 <body>
 <%@ include file="head.jsp" %>
-<div id="content" class="bg-success" style="height: 100%">
-    <a href="users/all">Users</a>|
-    <a href="phases/all">Phases</a>
-</div>
+<sec:authorize access="isAuthenticated()">
+    <div id="content" class="bg-success" style="height: 100%">
+        <a class="btn btn-md bg-success" href="users/all">Users</a>|
+        <a class="btn btn-md bg-success" href="phases/all">Phases</a>
+    </div>
+</sec:authorize>
 </body>
 </html>

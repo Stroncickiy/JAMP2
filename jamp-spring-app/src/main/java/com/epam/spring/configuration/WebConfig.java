@@ -1,9 +1,6 @@
 package com.epam.spring.configuration;
 
-import com.epam.spring.converter.ParticipantConverter;
-import com.epam.spring.converter.ParticipantRoleConverter;
-import com.epam.spring.converter.ParticipantStatusConverter;
-import com.epam.spring.converter.UserConverter;
+import com.epam.spring.converter.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -50,6 +47,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		registry.addConverter(context.getBean(ParticipantConverter.class));
 		registry.addConverter(new ParticipantRoleConverter());
         registry.addConverter(new ParticipantStatusConverter());
+        registry.addConverter(new GroupStatusConverter());
         registry.addConverter(context.getBean(UserConverter.class));
 		// converterAutoscanner(registry);
 	}

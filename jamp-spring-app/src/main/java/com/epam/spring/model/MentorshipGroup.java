@@ -4,6 +4,7 @@ import com.epam.spring.enums.GroupStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -12,8 +13,10 @@ public class MentorshipGroup {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
+    @NotNull
     private ParticipantAssignment mentor;
     @OneToOne
+    @NotNull
     private ParticipantAssignment mentee;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -28,8 +31,10 @@ public class MentorshipGroup {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date actualEnd;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private GroupStatus status;
     @ManyToOne
+    @NotNull
     private MentorshipPhase phase;
 
     public ParticipantAssignment getMentor() {

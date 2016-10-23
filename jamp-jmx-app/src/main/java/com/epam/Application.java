@@ -41,12 +41,15 @@ public class Application {
             System.out.format(" Broker did not started due to %S", e.getMessage());
         }
 
-        executorService.execute(new AncillaryService(broker));
-        executorService.execute(new LuggageService(broker));
-        executorService.execute(new BookingService(broker));
+        if (broker != null) {
+            executorService.execute(new AncillaryService(broker));
+            executorService.execute(new LuggageService(broker));
+            executorService.execute(new BookingService(broker));
 
-        executorService.execute(new EmailService("ADS", broker));
-        executorService.execute(new EmailService("NEWS", broker));
+            executorService.execute(new EmailService("ADS", broker));
+            executorService.execute(new EmailService("NEWS", broker));
+        }
+
 
         return broker;
     }

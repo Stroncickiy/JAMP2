@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("users")
 public class UserController {
@@ -43,7 +45,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "edit", method = RequestMethod.POST)
-	public ModelAndView updateUserData(@ModelAttribute User userToEdit,BindingResult bindingResult,Model model) {
+	public ModelAndView updateUserData(@Valid @ModelAttribute User userToEdit, BindingResult bindingResult, Model model) {
 		ModelAndView modelAndView = new ModelAndView("editUser",model.asMap());
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("userToEdit",userToEdit);

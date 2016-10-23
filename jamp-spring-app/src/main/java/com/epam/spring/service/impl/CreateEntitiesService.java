@@ -7,8 +7,6 @@ import com.epam.spring.enums.UserRole;
 import com.epam.spring.model.*;
 import com.epam.spring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -19,23 +17,21 @@ import java.util.Date;
 
 @Service
 public class CreateEntitiesService {
-	@Autowired
-	private MentorshipPhaseService mentorshipPhaseService;
+    @Autowired
+    private MentorshipPhaseService mentorshipPhaseService;
 
     @Autowired
     private MentorshipGroupService mentorshipGroupService;
-	@Autowired
-	private UserService userSerivice;
-	@Autowired
-	private ParticipantService participantService;
-	@Autowired
-	private LectureService lectureService;
+    @Autowired
+    private UserService userSerivice;
+    @Autowired
+    private ParticipantService participantService;
+    @Autowired
+    private LectureService lectureService;
 
-	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();;
 
-	@PostConstruct
-	public void init() {
-
+    @PostConstruct
+    public void init() {
 
 
         // Phases
@@ -58,7 +54,7 @@ public class CreateEntitiesService {
         MentorshipPhase qaMentorshipPhase = new MentorshipPhase();
         qaMentorshipPhase.setLocation("Lviv");
         qaMentorshipPhase.setTitle("QA Mentorship Program");
-        qaMentorshipPhase.setStartDate(Date.from(LocalDate.of(2016,10, 15).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        qaMentorshipPhase.setStartDate(Date.from(LocalDate.of(2016, 10, 15).atStartOfDay().toInstant(ZoneOffset.UTC)));
         qaMentorshipPhase.setEndDate(Date.from(LocalDate.of(2016, 12, 15).atStartOfDay().toInstant(ZoneOffset.UTC)));
         qaMentorshipPhase = mentorshipPhaseService.add(qaMentorshipPhase);
 
@@ -77,22 +73,22 @@ public class CreateEntitiesService {
         phpMentorshipPhase = mentorshipPhaseService.add(phpMentorshipPhase);
 
 
-		// Users
+        // Users
 
-		User admin = new User();
-		admin.setFirstName("Admin");
-		admin.setLastName("Admin");
-		admin.setEmail("admin@epam.com");
-		admin.setEnabled(true);
-		admin.setPassword(passwordEncoder.encode("admin"));
-		admin.setPrimarySkill("Admin");
-		admin.setLevel(5);
-		admin.setBirthDate(Date.from(LocalDate.of(1996, 10, 10).atStartOfDay().toInstant(ZoneOffset.UTC)));
-		ArrayList<UserRole> roles = new ArrayList<>();
-		roles.add(UserRole.ADMIN);
-		roles.add(UserRole.CLIENT);
-		admin.setRoles(roles);
-		admin = userSerivice.add(admin);
+        User admin = new User();
+        admin.setFirstName("Admin");
+        admin.setLastName("Admin");
+        admin.setEmail("admin@epam.com");
+        admin.setEnabled(true);
+        admin.setPassword("adminadmin");
+        admin.setPrimarySkill("Admin");
+        admin.setLevel(5);
+        admin.setBirthDate(Date.from(LocalDate.of(1996, 10, 10).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        ArrayList<UserRole> roles = new ArrayList<>();
+        roles.add(UserRole.ADMIN);
+        roles.add(UserRole.CLIENT);
+        admin.setRoles(roles);
+        admin = userSerivice.add(admin);
 
 
         User clientAlex = new User();
@@ -102,26 +98,26 @@ public class CreateEntitiesService {
         clientAlex.setEnabled(true);
         clientAlex.setPrimarySkill("Java");
         clientAlex.setLevel(1);
-        clientAlex.setPassword(passwordEncoder.encode("client"));
+        clientAlex.setPassword("client");
         clientAlex.setBirthDate(Date.from(LocalDate.of(1994, 2, 12).atStartOfDay().toInstant(ZoneOffset.UTC)));
         ArrayList<UserRole> rolesOfAlex = new ArrayList<>();
         rolesOfAlex.add(UserRole.CLIENT);
         clientAlex.setRoles(rolesOfAlex);
         clientAlex = userSerivice.add(clientAlex);
 
-		User clientVasya = new User();
-		clientVasya.setFirstName("Vasya");
-		clientVasya.setLastName("Pupkin");
-		clientVasya.setEmail("vasya@epam.com");
-		clientVasya.setEnabled(true);
-		clientVasya.setPassword(passwordEncoder.encode("client"));
-		clientVasya.setPrimarySkill("Java");
-		clientVasya.setLevel(3);
-		clientVasya.setBirthDate(Date.from(LocalDate.of(1993, 9, 12).atStartOfDay().toInstant(ZoneOffset.UTC)));
-		ArrayList<UserRole> rolesOfVasya = new ArrayList<>();
-		rolesOfVasya.add(UserRole.CLIENT);
-		clientVasya.setRoles(rolesOfVasya);
-		clientVasya = userSerivice.add(clientVasya);
+        User clientVasya = new User();
+        clientVasya.setFirstName("Vasya");
+        clientVasya.setLastName("Pupkin");
+        clientVasya.setEmail("vasya@epam.com");
+        clientVasya.setEnabled(true);
+        clientVasya.setPassword("client");
+        clientVasya.setPrimarySkill("Java");
+        clientVasya.setLevel(3);
+        clientVasya.setBirthDate(Date.from(LocalDate.of(1993, 9, 12).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        ArrayList<UserRole> rolesOfVasya = new ArrayList<>();
+        rolesOfVasya.add(UserRole.CLIENT);
+        clientVasya.setRoles(rolesOfVasya);
+        clientVasya = userSerivice.add(clientVasya);
 
 
         ParticipantAssignment javaLector = new ParticipantAssignment();
@@ -130,7 +126,6 @@ public class CreateEntitiesService {
         javaLector.setRole(ParticipantRole.LECTOR);
         javaLector.setStatus(ParticipantStatus.IN_PROGRESS);
         javaLector = participantService.add(javaLector);
-
 
 
         Lecture javaLecture1 = new Lecture();
@@ -154,13 +149,12 @@ public class CreateEntitiesService {
         lectureService.add(javaLecture2);
 
 
-
         User clientSlava = new User();
         clientSlava.setFirstName("Slava");
         clientSlava.setLastName("Bobkin");
         clientSlava.setEmail("slava@epam.com");
         clientSlava.setEnabled(true);
-        clientSlava.setPassword(passwordEncoder.encode("client"));
+        clientSlava.setPassword("client");
         clientSlava.setPrimarySkill("Java");
         clientSlava.setLevel(1);
         clientSlava.setBirthDate(Date.from(LocalDate.of(1995, 2, 10).atStartOfDay().toInstant(ZoneOffset.UTC)));
@@ -214,18 +208,18 @@ public class CreateEntitiesService {
 
 
         User clientMax = new User();
-		clientMax.setFirstName("Maxim");
-		clientMax.setLastName("Markov");
-		clientMax.setEmail("max@epam.com");
-		clientMax.setEnabled(true);
-		clientMax.setPrimarySkill(".Net");
-		clientMax.setLevel(3);
-		clientMax.setPassword(passwordEncoder.encode("client"));
-		clientMax.setBirthDate(Date.from(LocalDate.of(1992, 1, 11).atStartOfDay().toInstant(ZoneOffset.UTC)));
-		ArrayList<UserRole> rolesOfMax = new ArrayList<>();
-		rolesOfMax.add(UserRole.CLIENT);
-		clientMax.setRoles(rolesOfMax);
-		clientMax = userSerivice.add(clientMax);
+        clientMax.setFirstName("Maxim");
+        clientMax.setLastName("Markov");
+        clientMax.setEmail("max@epam.com");
+        clientMax.setEnabled(true);
+        clientMax.setPrimarySkill(".Net");
+        clientMax.setLevel(3);
+        clientMax.setPassword("client");
+        clientMax.setBirthDate(Date.from(LocalDate.of(1992, 1, 11).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        ArrayList<UserRole> rolesOfMax = new ArrayList<>();
+        rolesOfMax.add(UserRole.CLIENT);
+        clientMax.setRoles(rolesOfMax);
+        clientMax = userSerivice.add(clientMax);
 
         User clientAnton = new User();
         clientAnton.setFirstName("Anton");
@@ -234,8 +228,8 @@ public class CreateEntitiesService {
         clientAnton.setEnabled(true);
         clientAnton.setPrimarySkill(".Net");
         clientAnton.setLevel(1);
-        clientAnton.setPassword(passwordEncoder.encode("client"));
-        clientAnton.setBirthDate(Date.from(LocalDate.of(1990,3, 12).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        clientAnton.setPassword("client");
+        clientAnton.setBirthDate(Date.from(LocalDate.of(1990, 3, 12).atStartOfDay().toInstant(ZoneOffset.UTC)));
         ArrayList<UserRole> rolesOfAnton = new ArrayList<>();
         rolesOfAnton.add(UserRole.CLIENT);
         clientAnton.setRoles(rolesOfAnton);
@@ -248,7 +242,6 @@ public class CreateEntitiesService {
         dotNetLector.setRole(ParticipantRole.LECTOR);
         dotNetLector.setStatus(ParticipantStatus.IN_PROGRESS);
         dotNetLector = participantService.add(dotNetLector);
-
 
 
         Lecture dotNetLecture1 = new Lecture();
@@ -297,20 +290,19 @@ public class CreateEntitiesService {
         dotNetMentorshipGroup = mentorshipGroupService.add(dotNetMentorshipGroup);
 
 
-
-		User clientOleg = new User();
-		clientOleg.setFirstName("Oleg");
-		clientOleg.setLastName("Soda");
-		clientOleg.setEmail("oleg@epam.com");
-		clientOleg.setEnabled(true);
-		clientOleg.setPrimarySkill("PHP");
-		clientOleg.setLevel(3);
-		clientOleg.setPassword(passwordEncoder.encode("client"));
-		clientOleg.setBirthDate(Date.from(LocalDate.of(1993, 5, 13).atStartOfDay().toInstant(ZoneOffset.UTC)));
-		ArrayList<UserRole> rolesOfOleg = new ArrayList<>();
-		rolesOfMax.add(UserRole.CLIENT);
-		clientOleg.setRoles(rolesOfOleg);
-		clientOleg = userSerivice.add(clientOleg);
+        User clientOleg = new User();
+        clientOleg.setFirstName("Oleg");
+        clientOleg.setLastName("Soda");
+        clientOleg.setEmail("oleg@epam.com");
+        clientOleg.setEnabled(true);
+        clientOleg.setPrimarySkill("PHP");
+        clientOleg.setLevel(3);
+        clientOleg.setPassword("client");
+        clientOleg.setBirthDate(Date.from(LocalDate.of(1993, 5, 13).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        ArrayList<UserRole> rolesOfOleg = new ArrayList<>();
+        rolesOfOleg.add(UserRole.CLIENT);
+        clientOleg.setRoles(rolesOfOleg);
+        clientOleg = userSerivice.add(clientOleg);
 
 
         ParticipantAssignment phpLector = new ParticipantAssignment();
@@ -327,23 +319,12 @@ public class CreateEntitiesService {
         clientMarina.setEnabled(true);
         clientMarina.setPrimarySkill("QA");
         clientMarina.setLevel(1);
-        clientMarina.setPassword(passwordEncoder.encode("client"));
-        clientMarina.setBirthDate(Date.from(LocalDate.of(1995, 6,7).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        clientMarina.setPassword("client");
+        clientMarina.setBirthDate(Date.from(LocalDate.of(1995, 6, 7).atStartOfDay().toInstant(ZoneOffset.UTC)));
         ArrayList<UserRole> rolesOfMarina = new ArrayList<>();
-        rolesOfMax.add(UserRole.CLIENT);
+        rolesOfMarina.add(UserRole.CLIENT);
         clientMarina.setRoles(rolesOfMarina);
         clientMarina = userSerivice.add(clientMarina);
-
-
-
-
-
-
-
-
-
-
-
     }
 
 }

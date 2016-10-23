@@ -50,7 +50,7 @@ public class Broker {
             e.printStackTrace();
         }
 
-        if (session != null) {
+        if (connection != null) {
             try {
                 session = connection.createSession(true, Session.SESSION_TRANSACTED);
             } catch (JMSException e) {

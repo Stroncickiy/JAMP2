@@ -12,7 +12,7 @@
 	<%@ include file="head.jsp"%>
 	<h1> Mentors who mentors more than one mentee</h1>
 	<div id="content">
-		<table class="table table-bordered">
+		<table class="table table-bordered table-condensed">
 			<thead>
 				<tr>
 					<th>id</th>

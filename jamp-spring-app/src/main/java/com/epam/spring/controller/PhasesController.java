@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/phases")
 public class PhasesController {
@@ -35,8 +37,8 @@ public class PhasesController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView addNewPhase(@ModelAttribute MentorshipPhase phaseToAdd, BindingResult bindingResult,
-			Model model) {
+	public ModelAndView addNewPhase(@Valid @ModelAttribute MentorshipPhase phaseToAdd, BindingResult bindingResult,
+                                    Model model) {
 		ModelAndView modelAndView = new ModelAndView("addNewPhase", model.asMap());
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("phaseToAdd", phaseToAdd);
