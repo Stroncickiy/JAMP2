@@ -1,5 +1,8 @@
 package com.epam.spring.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,7 +11,10 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
+@Data
 @Entity
+@ToString(of = {"id", "title", "location"})
+@EqualsAndHashCode(of = {"id"})
 public class MentorshipPhase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,75 +31,11 @@ public class MentorshipPhase {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
-    @OneToMany(mappedBy = "phase")
+    @OneToMany(mappedBy = "phase", fetch = FetchType.LAZY)
     private List<ParticipantAssignment> participants;
-    @OneToMany(mappedBy = "phase")
+    @OneToMany(mappedBy = "phase", fetch = FetchType.LAZY)
     private List<MentorshipGroup> groups;
-    @OneToMany(mappedBy = "phase")
+    @OneToMany(mappedBy = "phase", fetch = FetchType.LAZY)
     private List<Lecture> lectures;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<MentorshipGroup> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(List<MentorshipGroup> groups) {
-        this.groups = groups;
-    }
-
-    public List<ParticipantAssignment> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<ParticipantAssignment> participants) {
-        this.participants = participants;
-    }
-
-    public List<Lecture> getLectures() {
-        return lectures;
-    }
-
-    public void setLectures(List<Lecture> lectures) {
-        this.lectures = lectures;
-    }
 
 }

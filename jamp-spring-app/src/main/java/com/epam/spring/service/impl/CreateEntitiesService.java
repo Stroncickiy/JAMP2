@@ -204,7 +204,7 @@ public class CreateEntitiesService {
         javaMentorshipGroup2.setPhase(javaMentorshipPhase);
         javaMentorshipGroup2.setStatus(GroupStatus.IN_PROGRESS);
 
-        javaMentorshipGroup = mentorshipGroupService.add(javaMentorshipGroup2);
+        javaMentorshipGroup2 = mentorshipGroupService.add(javaMentorshipGroup2);
 
 
         User clientMax = new User();

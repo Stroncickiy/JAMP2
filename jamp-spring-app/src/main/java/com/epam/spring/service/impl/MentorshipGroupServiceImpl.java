@@ -9,53 +9,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 public class MentorshipGroupServiceImpl implements MentorshipGroupService {
 
-	@Autowired
-	private MentorshipGroupDAO groupDao;
+    @Autowired
+    private MentorshipGroupDAO groupDao;
 
-	@Override
-	public MentorshipGroup add(MentorshipGroup item) {
-		return groupDao.add(item);
-	}
+    @Override
+    public MentorshipGroup add(MentorshipGroup item) {
+        List<ParticipantAssignment> participants = new ArrayList<>();
+        participants.add(item.getMentor());
+        participants.add(item.getMentee());
+        item.setParticipants(participants);
+        return groupDao.add(item);
+    }
 
-	@Override
-	public boolean remove(MentorshipGroup item) {
-		return groupDao.remove(item);
-	}
+    @Override
+    public boolean remove(MentorshipGroup item) {
+        return groupDao.remove(item);
+    }
 
-	@Override
-	public MentorshipGroup getById(Long id) {
-		return groupDao.getById(id);
-	}
+    @Override
+    public MentorshipGroup getById(Long id) {
+        return groupDao.getById(id);
+    }
 
-	@Override
-	public List<MentorshipGroup> getAll() {
-		return groupDao.getAll();
-	}
+    @Override
+    public List<MentorshipGroup> getAll() {
+        return groupDao.getAll();
+    }
 
-	@Override
-	public boolean update(MentorshipGroup item) {
-		return groupDao.update(item);
-	}
+    @Override
+    public boolean update(MentorshipGroup item) {
+        List<ParticipantAssignment> participants = new ArrayList<>();
+        participants.add(item.getMentor());
+        participants.add(item.getMentee());
+        item.setParticipants(participants);
+        return groupDao.update(item);
+    }
 
-	@Override
-	public void refresh(MentorshipGroup item) {
-		groupDao.refresh(item);
+    @Override
+    public void refresh(MentorshipGroup item) {
+        groupDao.refresh(item);
 
-	}
+    }
 
-	@Override
-	public List<MentorshipGroup> getForPhase(MentorshipPhase targetMentorshipPhase) {
-		return groupDao.getForPhase(targetMentorshipPhase);
-	}
+    @Override
+    public List<MentorshipGroup> getForPhase(MentorshipPhase targetMentorshipPhase) {
+        return groupDao.getForPhase(targetMentorshipPhase);
+    }
 
-	@Override
-	public List<ParticipantAssignment> getMentorsWhoMentorsMoreThanTwoMentees() {
-		return groupDao.getMentorsWhoMentorsMoreThanTwoMentees();
-	}
+
 }

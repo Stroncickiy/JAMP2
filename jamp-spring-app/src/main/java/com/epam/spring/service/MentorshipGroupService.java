@@ -10,5 +10,5 @@ public interface MentorshipGroupService extends CommonService<MentorshipGroup> {
 
     List<MentorshipGroup> getForPhase(MentorshipPhase targetMentorshipPhase);
 
-    List<ParticipantAssignment> getMentorsWhoMentorsMoreThanTwoMentees();
+
 }

@@ -1,22 +1,31 @@
 package com.epam.spring.model;
 
 import com.epam.spring.enums.GroupStatus;
+import com.epam.spring.enums.ParticipantRole;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.collection.internal.PersistentList;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
+@Data
+@ToString(of = {"id", "mentor", "mentee"})
+@EqualsAndHashCode(of = {"id"})
 @Entity
 public class MentorshipGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    @NotNull
+    @ManyToMany
+    private List<ParticipantAssignment> participants;
+    @Transient
     private ParticipantAssignment mentor;
-    @OneToOne
-    @NotNull
+    @Transient
     private ParticipantAssignment mentee;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -37,75 +46,11 @@ public class MentorshipGroup {
     @NotNull
     private MentorshipPhase phase;
 
-    public ParticipantAssignment getMentor() {
-        return mentor;
-    }
-
-    public void setMentor(ParticipantAssignment mentor) {
-        this.mentor = mentor;
-    }
-
-    public ParticipantAssignment getMentee() {
-        return mentee;
-    }
-
-    public void setMentee(ParticipantAssignment mentee) {
-        this.mentee = mentee;
-    }
-
-    public Date getPlannedStart() {
-        return plannedStart;
-    }
-
-    public void setPlannedStart(Date plannedStart) {
-        this.plannedStart = plannedStart;
-    }
-
-    public Date getPlannedEnd() {
-        return plannedEnd;
-    }
-
-    public void setPlannedEnd(Date plannedEnd) {
-        this.plannedEnd = plannedEnd;
-    }
-
-    public Date getActualStart() {
-        return actualStart;
-    }
-
-    public void setActualStart(Date actualStart) {
-        this.actualStart = actualStart;
-    }
-
-    public Date getActualEnd() {
-        return actualEnd;
-    }
-
-    public void setActualEnd(Date actualEnd) {
-        this.actualEnd = actualEnd;
-    }
-
-    public GroupStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(GroupStatus status) {
-        this.status = status;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setPhase(MentorshipPhase phase) {
-        this.phase = phase;
-    }
-
-    public MentorshipPhase getPhase() {
-        return phase;
+    @PostLoad
+    @PostPersist
+    @PostUpdate
+    private void postPersist() {
+        mentor = participants.stream().filter(p -> p.getRole().equals(ParticipantRole.MENTOR)).findFirst().get();
+        mentee = participants.stream().filter(p -> p.getRole().equals(ParticipantRole.MENTEE)).findFirst().get();
     }
 }

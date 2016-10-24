@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface ParticipantService extends CommonService<ParticipantAssignment> {
 
-	List<ParticipantAssignment> getLectorsForPhase(MentorshipPhase phase);
+    List<ParticipantAssignment> getLectorsForPhase(MentorshipPhase phase);
 
     List<ParticipantAssignment> getParticipantsForPhase(MentorshipPhase phase);
 
-    List<ParticipantAssignment>  getParticipantsForPhaseByRole(MentorshipPhase phase,ParticipantRole role);
+    List<ParticipantAssignment> getParticipantsForPhaseByRole(MentorshipPhase phase, ParticipantRole role);
 
+     List<ParticipantAssignment> getMenteesWithoutMentorsInSpecifiedCity(String location);
 
+    List<ParticipantAssignment> getMentorsWhoMentorsMoreThanTwoMentees();
 }

@@ -48,7 +48,7 @@ public class ParticipantsController {
     @RequestMapping(value = "/mentorsMoreThan1", method = RequestMethod.GET)
     public ModelAndView showMentorsWhoMentorsMoreThan1Mentee(ModelAndView modelAndView) {
         modelAndView.setViewName("mentorsWhoMentorsMoreThan1");
-        List<ParticipantAssignment> mentorsWhoMentorsMoreThanTwoMentees = mentorshipGroupService.getMentorsWhoMentorsMoreThanTwoMentees();
+        List<ParticipantAssignment> mentorsWhoMentorsMoreThanTwoMentees = participantsService.getMentorsWhoMentorsMoreThanTwoMentees();
         modelAndView.addObject("mentors", mentorsWhoMentorsMoreThanTwoMentees);
         return modelAndView;
 
@@ -72,7 +72,7 @@ public class ParticipantsController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addNewParticipant(@Valid  @ModelAttribute ParticipantAssignment participantAssignmentToAdd, BindingResult bindingResult,
+    public ModelAndView addNewParticipant(@Valid @ModelAttribute ParticipantAssignment participantAssignmentToAdd, BindingResult bindingResult,
                                           Model model) {
         ModelAndView modelAndView = new ModelAndView("addNewParticipant", model.asMap());
         if (bindingResult.hasErrors()) {
@@ -121,6 +121,16 @@ public class ParticipantsController {
         }
         participantsService.update(participantAssignmentToUpdate);
         return new ModelAndView(new RedirectView("/participants/" + participantAssignmentToUpdate.getPhase().getId()));
+
+    }
+
+    @RequestMapping(value = "/menteesWithoutMentors/{location}", method = RequestMethod.GET)
+    public ModelAndView showMenteesWithoutMentors(ModelAndView modelAndView, @PathVariable String location) {
+        modelAndView.setViewName("menteesWithoutMentors");
+        List<ParticipantAssignment> menteesWithoutMentors = participantsService.getMenteesWithoutMentorsInSpecifiedCity(location);
+        modelAndView.addObject("mentees", menteesWithoutMentors);
+        modelAndView.addObject("targetLocation", location);
+        return modelAndView;
 
     }
 

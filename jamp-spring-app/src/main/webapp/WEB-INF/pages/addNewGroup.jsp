@@ -45,7 +45,7 @@
         <c:if test="${validationErrors != null}">
             <div class="alert alert-danger">
                 <c:forEach items="${validationErrors}" var="error">
-                    <p>${error.defaultMessage}</p>
+                    <p>${error}</p>
                 </c:forEach>
             </div>
         </c:if>

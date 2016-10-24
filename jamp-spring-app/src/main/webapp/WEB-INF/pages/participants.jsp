@@ -20,6 +20,8 @@
         <a class="btn btn-sm bg-success " href="${pageContext.request.contextPath}/participants/mentorsMoreThan1">Mentors
             who mentors more than 1
             mentee</a>
+        <a class="btn btn-sm bg-success " href="${pageContext.request.contextPath}/participants/menteesWithoutMentors/${targetMentorshipPhase.location}">Mentees without mentors in ${targetMentorshipPhase.location}</a>
+        <a class="btn btn-sm bg-success " href="${pageContext.request.contextPath}/participants/menteesStatistics">Mentees statistics</a>
     </div>
     <table class="table table-bordered table-condensed ">
         <thead>

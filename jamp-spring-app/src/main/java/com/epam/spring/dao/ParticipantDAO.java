@@ -14,5 +14,7 @@ public interface ParticipantDAO extends CommonDAO<ParticipantAssignment> {
 
 	List<ParticipantAssignment> getParticipantsOfPhase(MentorshipPhase phase);
 
+    List<ParticipantAssignment> getMenteesWithoutMentorsInSpecifiedCity(String location);
 
+    List<ParticipantAssignment> getMentorsWhoMentorsMoreThanTwoMentees();
 }

@@ -15,7 +15,10 @@
     <div class="bg-info text-center"><a class="btn btn-sm bg-success "
                                         href="${pageContext.request.contextPath}/phases/add"><span
             class="glyphicon glyphicon-plus"></span>Add new
-        Phase</a></div>
+        Phase</a>
+        <a class="btn btn-sm bg-success " href="${pageContext.request.contextPath}/phases/statistics">Phases statistics by cities</a>
+    </div>
+
     <table class="table table-bordered table-condensed">
         <thead>
         <tr class="info">

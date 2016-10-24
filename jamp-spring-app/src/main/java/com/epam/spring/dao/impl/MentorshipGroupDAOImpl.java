@@ -9,9 +9,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class MentorshipGroupDAOImpl extends CommonDAOImpl<MentorshipGroup> implements MentorshipGroupDAO {
@@ -28,11 +26,5 @@ public class MentorshipGroupDAOImpl extends CommonDAOImpl<MentorshipGroup> imple
         return findGroupByPhase.list();
     }
 
-    @Override
-    public List<ParticipantAssignment> getMentorsWhoMentorsMoreThanTwoMentees() {
-        Session session = (Session) entityManager.getDelegate();
-        Query findGroups = session.createQuery(" select  mg.mentor from MentorshipGroup mg where mg.status ='IN_PROGRESS' group by mg.mentor having count(mg.id)>1 ");
-        List<ParticipantAssignment> mentors = findGroups.list();
-        return mentors;
-    }
+
 }

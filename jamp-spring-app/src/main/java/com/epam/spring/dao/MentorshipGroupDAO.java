@@ -10,5 +10,5 @@ public interface MentorshipGroupDAO extends CommonDAO<MentorshipGroup> {
 
     List<MentorshipGroup> getForPhase(MentorshipPhase targetMentorshipPhase);
 
-    List<ParticipantAssignment> getMentorsWhoMentorsMoreThanTwoMentees();
+
 }
