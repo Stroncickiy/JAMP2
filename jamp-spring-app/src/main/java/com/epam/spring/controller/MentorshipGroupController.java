@@ -44,6 +44,7 @@ public class MentorshipGroupController {
         modelAndView.setViewName("addNewGroup");
         MentorshipPhase phase = phaseService.getById(phaseId);
         MentorshipGroup mentorshipGroupToAdd = new MentorshipGroup();
+        mentorshipGroupToAdd.setStatus(GroupStatus.INITIATION);
         mentorshipGroupToAdd.setPhase(phase);
 
         modelAndView.addObject("targetMentorshipPhase", phase);
@@ -69,7 +70,6 @@ public class MentorshipGroupController {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             return modelAndView;
         }
-        groupToAdd.setStatus(GroupStatus.INITIATION);
         mentorshipGroupService.add(groupToAdd);
         return new ModelAndView(new RedirectView("/groups/" + groupToAdd.getPhase().getId()));
     }

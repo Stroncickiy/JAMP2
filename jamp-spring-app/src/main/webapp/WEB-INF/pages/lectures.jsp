@@ -14,20 +14,21 @@
 <div id="content">
     <div class="bg-info text-center">
         <a class="btn btn-sm bg-success"
-           href="${pageContext.request.contextPath}/lectures/add/${targetMentorshipPhase.id}">Add
+           href="${pageContext.request.contextPath}/lectures/add/${targetMentorshipPhase.id}"><span
+                class="glyphicon glyphicon-plus"></span> Add
             new Lecture</a>
     </div>
     <table class="table table-bordered table-condensed ">
         <thead>
         <tr class="info">
-            <th>ID</th>
-            <th>Domain Area</th>
-            <th>Topic</th>
-            <th>Lector Email</th>
-            <th>Start</th>
-            <th>End</th>
+            <th><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i> Id</th>
+            <th><i class="fa fa-code" aria-hidden="true"></i> Domain Area</th>
+            <th><i class="fa fa-bars" aria-hidden="true"></i> Topic</th>
+            <th><i class="fa fa-user" aria-hidden="true"></i> Lector Email</th>
+            <th><i class="fa fa-calendar" aria-hidden="true"></i> Start</th>
+            <th><i class="fa fa-calendar" aria-hidden="true"></i> End</th>
             <sec:authorize access="isAuthenticated() AND hasAuthority('ADMIN')">
-                <th>Actions</th>
+                <th><i class="fa fa-wrench" aria-hidden="true"></i> Actions</th>
             </sec:authorize>
         </tr>
         </thead>
@@ -43,9 +44,9 @@
                 <sec:authorize access="isAuthenticated() AND hasAuthority('ADMIN')">
                     <td>
                         <a class="btn btn-sm bg-success"
-                           href="${pageContext.request.contextPath}/lectures/update/${lecture.id}">Update</a>
+                           href="${pageContext.request.contextPath}/lectures/update/${lecture.id}"><i class="fa fa-pencil" aria-hidden="true"></i> Update</a>
                         <a class="btn btn-sm bg-danger"
-                           href="${pageContext.request.contextPath}/lectures/remove/${lecture.id}">Remove</a>
+                           href="${pageContext.request.contextPath}/lectures/remove/${lecture.id}"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
                     </td>
                 </sec:authorize>
             </tr>

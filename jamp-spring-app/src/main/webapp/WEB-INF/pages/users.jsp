@@ -17,17 +17,17 @@
     <table class="table table-bordered table-responsive ">
         <thead>
         <tr class="info">
-            <th>ID</th>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Birth Date</th>
-            <th>Level</th>
-            <th>Skill</th>
-            <th>Creation Time</th>
-            <th>Last Updated By</th>
-            <th>Last Updated Time</th>
-            <th>Control</th>
+            <th><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i> Id</th>
+            <th><i class="fa fa-envelope" aria-hidden="true"></i> Email</th>
+            <th><i class="fa fa-pencil-square-o" aria-hidden="true"></i> First Name</th>
+            <th><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Last Name</th>
+            <th><i class="fa fa-birthday-cake" aria-hidden="true"></i> Birth Date</th>
+            <th><i class="fa fa-level-up" aria-hidden="true"></i> Level</th>
+            <th><i class="fa fa-terminal" aria-hidden="true"></i> Skill</th>
+            <th><i class="fa fa-clock-o" aria-hidden="true"></i> Creation Time</th>
+            <th><i class="fa fa-user" aria-hidden="true"></i> Last Updated By</th>
+            <th><i class="fa fa-clock-o" aria-hidden="true"></i> Last Updated Time</th>
+            <th><i class="fa fa-bars" aria-hidden="true"></i> Control</th>
         </tr>
         </thead>
         <tbody>
@@ -45,16 +45,16 @@
                 <td>${user.lastUpdatedTime}</td>
                 <td>
                     <sec:authorize access="isAuthenticated() AND hasAuthority('ADMIN')">
-                        <a class="btn btn-sm bg-success" href="${pageContext.request.contextPath}/users/edit/${user.id}">Edit</a>
+                        <a class="btn btn-sm bg-success" href="${pageContext.request.contextPath}/users/edit/${user.id}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
                         <a class="btn btn-sm bg-danger"
-                           href="${pageContext.request.contextPath}/users/remove/${user.id}">Remove</a>
+                           href="${pageContext.request.contextPath}/users/remove/${user.id}"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
                     </sec:authorize>
 
                     <sec:authorize access="isAuthenticated() AND NOT hasAuthority('ADMIN')">
                         <c:if test="${loggedUser.username.equals(user.email)}">
                             <a class="btn btn-sm bg-success"
-                               href="${pageContext.request.contextPath}/users/edit/${user.id}">Edit</a>
-                            <a class="btn btn-sm bg-danger" href="${pageContext.request.contextPath}/users/remove/${user.id}">Remove</a>
+                               href="${pageContext.request.contextPath}/users/edit/${user.id}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                            <a class="btn btn-sm bg-danger" href="${pageContext.request.contextPath}/users/remove/${user.id}">Remove <i class="fa fa-trash" aria-hidden="true"></i></a>
                         </c:if>
                     </sec:authorize>
 

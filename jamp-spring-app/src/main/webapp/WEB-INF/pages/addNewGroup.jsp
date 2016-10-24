@@ -17,13 +17,14 @@
     <div id=main">
         <form:form action="${pageContext.request.contextPath}/groups/add/"
                    commandName="groupToAdd" method="post">
+            <form:hidden path="status"></form:hidden>
+            <form:hidden path="phase.id"/>
             <div class="input-group input-md">
                 <form:label path="mentor" cssClass="input-group-addon">Mentor</form:label>
                 <form:select path="mentor" cssClass="form-control" required="required">
                     <form:options items="${mentors}" itemValue="id" itemLabel="assignee.fullName"/>
                 </form:select>
             </div>
-            <form:hidden path="phase.id"/>
             <div class="input-group input-md">
                 <form:label cssClass="input-group-addon" path="mentee">Mentee</form:label>
                 <form:select path="mentee" cssClass="form-control" required="required">
@@ -43,7 +44,9 @@
         </form:form>
         <c:if test="${validationErrors != null}">
             <div class="alert alert-danger">
-                <p>${validationErrors}</p>
+                <c:forEach items="${validationErrors}" var="error">
+                    <p>${error.defaultMessage}</p>
+                </c:forEach>
             </div>
         </c:if>
     </div>

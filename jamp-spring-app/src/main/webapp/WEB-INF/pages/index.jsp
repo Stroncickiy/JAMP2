@@ -14,8 +14,8 @@
 <%@ include file="head.jsp" %>
 <sec:authorize access="isAuthenticated()">
     <div id="content" class="bg-success" style="height: 100%">
-        <a class="btn btn-md bg-success" href="users/all">Users</a>|
-        <a class="btn btn-md bg-success" href="phases/all">Phases</a>
+        <a class="btn btn-md bg-success" href="users/all"><i class="fa fa-users" aria-hidden="true"></i> Users</a>|
+        <a class="btn btn-md bg-success" href="phases/all"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Phases</a>
     </div>
 </sec:authorize>
 </body>

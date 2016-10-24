@@ -14,20 +14,21 @@
 <div id="content">
     <div class="bg-info text-center">
         <a class="btn btn-sm bg-success"
-           href="${pageContext.request.contextPath}/groups/add/${targetMentorshipPhase.id}">Add
+           href="${pageContext.request.contextPath}/groups/add/${targetMentorshipPhase.id}"><span
+                class="glyphicon glyphicon-plus"></span> Add
             new Group</a>
     </div>
     <table class="table table-bordered table-condensed">
         <thead>
         <tr class="info">
-            <th>id</th>
-            <th>Mentor</th>
-            <th>Mentee</th>
-            <th>Planned Start</th>
-            <th>Planned End</th>
-            <th>Status</th>
+            <th><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i> Id</th>
+            <th><i class="fa fa-user" aria-hidden="true"></i> Mentor</th>
+            <th><i class="fa fa-user" aria-hidden="true"></i>  Mentee</th>
+            <th><i class="fa fa-calendar" aria-hidden="true"></i> Planned Start</th>
+            <th><i class="fa fa-calendar" aria-hidden="true"></i> Planned End</th>
+            <th><i class="fa fa-line-chart" aria-hidden="true"></i> Status</th>
             <sec:authorize access="isAuthenticated() AND hasAuthority('ADMIN')">
-                <th>Actions</th>
+                <th><i class="fa fa-wrench" aria-hidden="true"></i> Actions</th>
             </sec:authorize>
         </tr>
         </thead>
@@ -43,9 +44,9 @@
                 <sec:authorize access="isAuthenticated() AND hasAuthority('ADMIN')">
                     <td>
                         <a class="btn btn-sm bg-success"
-                           href="${pageContext.request.contextPath}/groups/update/${group.id}">Update</a>
+                           href="${pageContext.request.contextPath}/groups/update/${group.id}"><i class="fa fa-pencil" aria-hidden="true"></i> Update</a>
                         <a class="btn btn-sm bg-danger"
-                           href="${pageContext.request.contextPath}/groups/remove/${group.id}">Remove</a>
+                           href="${pageContext.request.contextPath}/groups/remove/${group.id}"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
                     </td>
                 </sec:authorize>
             </tr>

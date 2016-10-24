@@ -19,14 +19,14 @@
     <table class="table table-bordered table-condensed">
         <thead>
         <tr class="info">
-            <th>id</th>
-            <th>title</th>
-            <th>location</th>
-            <th>start date</th>
-            <th>end date</th>
-            <th>Groups</th>
-            <th>Participants</th>
-            <th>Lectures</th>
+            <th><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i> Id</th>
+            <th><i class="fa fa-tag" aria-hidden="true"></i> Title</th>
+            <th><i class="fa fa-map-marker" aria-hidden="true"></i> Location</th>
+            <th><i class="fa fa-calendar" aria-hidden="true"></i> Start date</th>
+            <th><i class="fa fa-calendar" aria-hidden="true"></i> End date</th>
+            <th><i class="fa fa-users" aria-hidden="true"></i> Groups</th>
+            <th><i class="fa fa-user" aria-hidden="true"></i> Participants</th>
+            <th><i class="fa fa-pencil" aria-hidden="true"></i> Lectures</th>
         </tr>
         </thead>
         <tbody>

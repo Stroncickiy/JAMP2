@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login page</title>
 <link
-	href="${pageContext.request.contextPath}/resources/lib/css/bootstrap.css"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.css"
 	rel="stylesheet"></link>
 <link rel="stylesheet" type="text/css"
 	href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
