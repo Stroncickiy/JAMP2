@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/groups")
@@ -103,12 +104,41 @@ public class MentorshipGroupController {
     }
 
     @RequestMapping(value = "/remove/{groupId}", method = RequestMethod.GET)
-    public ModelAndView deleteLecture(@PathVariable("groupId") Long groupId) {
+    public ModelAndView deleteGroup(@PathVariable("groupId") Long groupId) {
         MentorshipGroup groupToDelete = mentorshipGroupService.getById(groupId);
         mentorshipGroupService.remove(groupToDelete);
         return new ModelAndView(new RedirectView("/groups/" + groupToDelete.getPhase().getId()));
 
     }
 
+    @RequestMapping(value = "/complete/{groupId}", method = RequestMethod.GET)
+    public ModelAndView completeGroup(@PathVariable("groupId") Long groupId) {
+        MentorshipGroup groupToUpdate = mentorshipGroupService.getById(groupId);
+        groupToUpdate.setStatus(GroupStatus.FINISHED);
+        groupToUpdate.setActualEnd(new Date());
+        mentorshipGroupService.update(groupToUpdate);
+        return new ModelAndView(new RedirectView("/groups/" + groupToUpdate.getPhase().getId()));
+
+    }
+
+    @RequestMapping(value = "/cancel/{groupId}", method = RequestMethod.GET)
+    public ModelAndView cancelGroup(@PathVariable("groupId") Long groupId) {
+        MentorshipGroup groupToUpdate = mentorshipGroupService.getById(groupId);
+        groupToUpdate.setStatus(GroupStatus.CANCELED);
+        groupToUpdate.setActualEnd(new Date());
+        mentorshipGroupService.update(groupToUpdate);
+        return new ModelAndView(new RedirectView("/groups/" + groupToUpdate.getPhase().getId()));
+
+    }
+
+    @RequestMapping(value = "/start/{groupId}", method = RequestMethod.GET)
+    public ModelAndView startGroup(@PathVariable("groupId") Long groupId) {
+        MentorshipGroup groupToUpdate = mentorshipGroupService.getById(groupId);
+        groupToUpdate.setStatus(GroupStatus.IN_PROGRESS);
+        groupToUpdate.setActualStart(new Date());
+        mentorshipGroupService.update(groupToUpdate);
+        return new ModelAndView(new RedirectView("/groups/" + groupToUpdate.getPhase().getId()));
+
+    }
 
 }

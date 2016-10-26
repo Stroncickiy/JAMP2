@@ -23,9 +23,11 @@
         <tr class="info">
             <th><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i> Id</th>
             <th><i class="fa fa-user" aria-hidden="true"></i> Mentor</th>
-            <th><i class="fa fa-user" aria-hidden="true"></i>  Mentee</th>
+            <th><i class="fa fa-user" aria-hidden="true"></i> Mentee</th>
             <th><i class="fa fa-calendar" aria-hidden="true"></i> Planned Start</th>
             <th><i class="fa fa-calendar" aria-hidden="true"></i> Planned End</th>
+            <th><i class="fa fa-calendar" aria-hidden="true"></i> Actual Start</th>
+            <th><i class="fa fa-calendar" aria-hidden="true"></i> Actual End</th>
             <th><i class="fa fa-line-chart" aria-hidden="true"></i> Status</th>
             <sec:authorize access="isAuthenticated() AND hasAuthority('ADMIN')">
                 <th><i class="fa fa-wrench" aria-hidden="true"></i> Actions</th>
@@ -40,13 +42,37 @@
                 <td>${group.mentee.assignee.fullName}</td>
                 <td>${group.plannedStart}</td>
                 <td>${group.plannedEnd}</td>
+                <td>${group.actualStart}</td>
+                <td>${group.actualEnd}</td>
                 <td>${group.status}</td>
                 <sec:authorize access="isAuthenticated() AND hasAuthority('ADMIN')">
                     <td>
+                        <c:if test="${group.status == 'INITIATION'}">
+                            <a class="btn btn-sm bg-warning"
+                               href="${pageContext.request.contextPath}/groups/start/${group.id}"><i class="fa fa-play"
+                                                                                                     aria-hidden="true"></i>
+                                Start</a>
+                        </c:if>
+                        <c:if test="${group.status == 'IN_PROGRESS'}">
+                            <a class="btn btn-sm bg-success"
+                               href="${pageContext.request.contextPath}/groups/complete/${group.id}"><i class="fa fa-check"
+                                                                                                        aria-hidden="true"></i>
+                                Complete</a>
+                            <a class="btn btn-sm bg-danger"
+                               href="${pageContext.request.contextPath}/groups/cancel/${group.id}"><i class="fa fa-ban"
+                                                                                                      aria-hidden="true"></i>
+                                Cancel</a>
+                        </c:if>
+                        <c:if test="${group.status != 'FINISHED'}">
                         <a class="btn btn-sm bg-success"
-                           href="${pageContext.request.contextPath}/groups/update/${group.id}"><i class="fa fa-pencil" aria-hidden="true"></i> Update</a>
-                        <a class="btn btn-sm bg-danger"
-                           href="${pageContext.request.contextPath}/groups/remove/${group.id}"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
+                           href="${pageContext.request.contextPath}/groups/update/${group.id}"><i class="fa fa-pencil"
+                                                                                                  aria-hidden="true"></i>
+                            Update</a>
+                            <a class="btn btn-sm bg-danger"
+                               href="${pageContext.request.contextPath}/groups/remove/${group.id}"><i class="fa fa-trash"
+                                                                                                      aria-hidden="true"></i>
+                                Remove</a>
+                        </c:if>
                     </td>
                 </sec:authorize>
             </tr>

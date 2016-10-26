@@ -5,7 +5,6 @@ import com.epam.spring.enums.ParticipantRole;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.hibernate.collection.internal.PersistentList;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -21,7 +20,7 @@ public class MentorshipGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<ParticipantAssignment> participants;
     @Transient
     private ParticipantAssignment mentor;

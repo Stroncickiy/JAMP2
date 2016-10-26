@@ -1,6 +1,7 @@
 package com.epam.spring.service.impl;
 
 import com.epam.spring.dao.ParticipantDAO;
+import com.epam.spring.dto.MenteeStatistics;
 import com.epam.spring.enums.ParticipantRole;
 import com.epam.spring.enums.ParticipantStatus;
 import com.epam.spring.model.MentorshipPhase;
@@ -74,5 +75,10 @@ public class ParticipantServiceImpl implements ParticipantService {
     @Override
     public List<ParticipantAssignment> getMentorsWhoMentorsMoreThanTwoMentees() {
         return participantDAO.getMentorsWhoMentorsMoreThanTwoMentees();
+    }
+
+    @Override
+    public List<MenteeStatistics> getMenteesStatisticsDescendingWithPagination(int page) {
+        return participantDAO.getMenteesStatisticsDescendingWithPagination(page);
     }
 }

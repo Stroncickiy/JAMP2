@@ -191,7 +191,7 @@ public class CreateEntitiesService {
         javaMentorshipGroup.setMentee(javaMenteeSlava);
         javaMentorshipGroup.setMentor(javaMentorVasya);
         javaMentorshipGroup.setPhase(javaMentorshipPhase);
-        javaMentorshipGroup.setStatus(GroupStatus.IN_PROGRESS);
+        javaMentorshipGroup.setStatus(GroupStatus.INITIATION);
 
         javaMentorshipGroup = mentorshipGroupService.add(javaMentorshipGroup);
 
@@ -202,7 +202,7 @@ public class CreateEntitiesService {
         javaMentorshipGroup2.setMentee(javaMenteeAlex);
         javaMentorshipGroup2.setMentor(javaMentorVasya);
         javaMentorshipGroup2.setPhase(javaMentorshipPhase);
-        javaMentorshipGroup2.setStatus(GroupStatus.IN_PROGRESS);
+        javaMentorshipGroup2.setStatus(GroupStatus.INITIATION);
 
         javaMentorshipGroup2 = mentorshipGroupService.add(javaMentorshipGroup2);
 
@@ -285,7 +285,7 @@ public class CreateEntitiesService {
         dotNetMentorshipGroup.setMentee(dotNetMenteeAnton);
         dotNetMentorshipGroup.setMentor(dotNetMentorMax);
         dotNetMentorshipGroup.setPhase(dotNetMentorshipPhase);
-        dotNetMentorshipGroup.setStatus(GroupStatus.IN_PROGRESS);
+        dotNetMentorshipGroup.setStatus(GroupStatus.INITIATION);
 
         dotNetMentorshipGroup = mentorshipGroupService.add(dotNetMentorshipGroup);
 

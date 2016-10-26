@@ -1,5 +1,6 @@
 package com.epam.spring.service;
 
+import com.epam.spring.dto.MenteeStatistics;
 import com.epam.spring.enums.ParticipantRole;
 import com.epam.spring.model.MentorshipPhase;
 import com.epam.spring.model.ParticipantAssignment;
@@ -14,7 +15,9 @@ public interface ParticipantService extends CommonService<ParticipantAssignment>
 
     List<ParticipantAssignment> getParticipantsForPhaseByRole(MentorshipPhase phase, ParticipantRole role);
 
-     List<ParticipantAssignment> getMenteesWithoutMentorsInSpecifiedCity(String location);
+    List<ParticipantAssignment> getMenteesWithoutMentorsInSpecifiedCity(String location);
 
     List<ParticipantAssignment> getMentorsWhoMentorsMoreThanTwoMentees();
+
+    List<MenteeStatistics> getMenteesStatisticsDescendingWithPagination(int page);
 }

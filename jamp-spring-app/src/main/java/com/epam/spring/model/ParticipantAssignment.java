@@ -29,7 +29,7 @@ public class ParticipantAssignment {
     @ManyToOne
     @NotNull
     private MentorshipPhase phase;
-    @ManyToMany(mappedBy = "participants")
+    @ManyToMany(mappedBy = "participants", fetch = FetchType.LAZY)
     private List<MentorshipGroup> groups;
 
 }
