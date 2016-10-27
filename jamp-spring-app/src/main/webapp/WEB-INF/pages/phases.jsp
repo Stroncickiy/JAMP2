@@ -17,7 +17,7 @@
             class="glyphicon glyphicon-plus"></span>Add new
         Phase</a>
         <a class="btn btn-sm bg-success " href="${pageContext.request.contextPath}/phases/statistics">Phases statistics by cities</a>
-        <a class="btn btn-sm bg-success " href="${pageContext.request.contextPath}/phases/completionStatistics">Success completion statistics</a>
+        <a class="btn btn-sm bg-success " href="${pageContext.request.contextPath}/phases/completionStatistics?from=2015-01-01&to=2017-01-01">Success completion statistics</a>
     </div>
 
     <table class="table table-bordered table-condensed">

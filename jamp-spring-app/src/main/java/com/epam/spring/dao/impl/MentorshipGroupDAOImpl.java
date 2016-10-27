@@ -3,7 +3,6 @@ package com.epam.spring.dao.impl;
 import com.epam.spring.dao.MentorshipGroupDAO;
 import com.epam.spring.model.MentorshipGroup;
 import com.epam.spring.model.MentorshipPhase;
-import com.epam.spring.model.ParticipantAssignment;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;

@@ -53,7 +53,6 @@ public class ParticipantDAOImpl extends CommonDAOImpl<ParticipantAssignment>
     }
 
 
-    // retrieves all participant assignment from phases where location = specified location and no groups with status in progress
     @Override
     public List<ParticipantAssignment> getMenteesWithoutMentorsInSpecifiedCity(String location) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -80,11 +79,11 @@ public class ParticipantDAOImpl extends CommonDAOImpl<ParticipantAssignment>
     @Override
     public List<MenteeStatistics> getMenteesStatisticsDescendingWithPagination(int pageNumber) {
         Session session = (Session) entityManager.getDelegate();
-        Query findMenteesQuery = session.createQuery("from ParticipantAssignment pa where pa.status = :status and pa.role = :role");
+        Query findMenteesQuery = session.createQuery("from ParticipantAssignment pa where pa.role = :role");
         findMenteesQuery.setParameter("role", ParticipantRole.MENTEE);
-        List<ParticipantAssignment> mentees = findMenteesQuery.list();
-        findMenteesQuery.setFirstResult(ITEMS_PER_PAGE * pageNumber);
+        findMenteesQuery.setFirstResult(pageNumber > 1 ? (ITEMS_PER_PAGE * (pageNumber - 1)) : 0);
         findMenteesQuery.setMaxResults(ITEMS_PER_PAGE);
+        List<ParticipantAssignment> mentees = findMenteesQuery.list();
         return buildMenteeStatistics(mentees);
     }
 

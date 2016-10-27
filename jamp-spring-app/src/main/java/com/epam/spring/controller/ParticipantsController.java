@@ -131,7 +131,7 @@ public class ParticipantsController {
 
     @RequestMapping(value = "/menteesStatistics", method = RequestMethod.GET)
     public ModelAndView menteesStatistics(ModelAndView modelAndView, @RequestParam("page") @Valid @Min(1) Integer page) {
-        modelAndView.setViewName("menteesStatistics");// TODO create view
+        modelAndView.setViewName("menteesStatistics");
         modelAndView.addObject("menteesStatistics", participantsService.getMenteesStatisticsDescendingWithPagination(page));
         return modelAndView;
     }

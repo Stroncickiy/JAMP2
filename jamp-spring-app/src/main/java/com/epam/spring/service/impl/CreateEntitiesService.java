@@ -187,22 +187,24 @@ public class CreateEntitiesService {
 
         MentorshipGroup javaMentorshipGroup = new MentorshipGroup();
         javaMentorshipGroup.setPlannedStart(Date.from(LocalDate.of(2016, 9, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        javaMentorshipGroup.setActualStart(Date.from(LocalDate.of(2016, 9, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
         javaMentorshipGroup.setPlannedEnd(Date.from(LocalDate.of(2016, 12, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
         javaMentorshipGroup.setMentee(javaMenteeSlava);
         javaMentorshipGroup.setMentor(javaMentorVasya);
         javaMentorshipGroup.setPhase(javaMentorshipPhase);
-        javaMentorshipGroup.setStatus(GroupStatus.INITIATION);
+        javaMentorshipGroup.setStatus(GroupStatus.IN_PROGRESS);
 
         javaMentorshipGroup = mentorshipGroupService.add(javaMentorshipGroup);
 
 
         MentorshipGroup javaMentorshipGroup2 = new MentorshipGroup();
         javaMentorshipGroup2.setPlannedStart(Date.from(LocalDate.of(2016, 9, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        javaMentorshipGroup2.setActualStart(Date.from(LocalDate.of(2016, 9, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
         javaMentorshipGroup2.setPlannedEnd(Date.from(LocalDate.of(2016, 12, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
         javaMentorshipGroup2.setMentee(javaMenteeAlex);
         javaMentorshipGroup2.setMentor(javaMentorVasya);
         javaMentorshipGroup2.setPhase(javaMentorshipPhase);
-        javaMentorshipGroup2.setStatus(GroupStatus.INITIATION);
+        javaMentorshipGroup2.setStatus(GroupStatus.IN_PROGRESS);
 
         javaMentorshipGroup2 = mentorshipGroupService.add(javaMentorshipGroup2);
 
@@ -281,11 +283,13 @@ public class CreateEntitiesService {
 
         MentorshipGroup dotNetMentorshipGroup = new MentorshipGroup();
         dotNetMentorshipGroup.setPlannedStart(Date.from(LocalDate.of(2016, 9, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        dotNetMentorshipGroup.setActualStart(Date.from(LocalDate.of(2016, 9, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
+        dotNetMentorshipGroup.setActualEnd(Date.from(LocalDate.of(2016, 12, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
         dotNetMentorshipGroup.setPlannedEnd(Date.from(LocalDate.of(2016, 12, 1).atStartOfDay().toInstant(ZoneOffset.UTC)));
         dotNetMentorshipGroup.setMentee(dotNetMenteeAnton);
         dotNetMentorshipGroup.setMentor(dotNetMentorMax);
         dotNetMentorshipGroup.setPhase(dotNetMentorshipPhase);
-        dotNetMentorshipGroup.setStatus(GroupStatus.INITIATION);
+        dotNetMentorshipGroup.setStatus(GroupStatus.FINISHED);
 
         dotNetMentorshipGroup = mentorshipGroupService.add(dotNetMentorshipGroup);
 
