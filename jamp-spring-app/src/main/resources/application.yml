@@ -1,14 +1,19 @@
-server: 
+server:
   port: 80
 spring:
-   jpa: 
-      database : H2
-      show-sql : true
-      ddl-auto : create
-
-       
-       
-       
-       
-       
-       
+ jpa:
+    database: MYSQL
+    show-sql : true
+    hibernate:
+     ddl-auto : create-drop
+ datasource:
+        url: jdbc:mysql://localhost:3306/mentorship?create=true
+        username: root
+        password: root
+        driver-class-name: "com.mysql.jdbc.Driver"
+ activemq :
+     broker-url : "tcp://127.0.0.1:61616"
+     user : admin
+     password : admin
+     packages:
+      trusted : " com.epam.spring.model"
