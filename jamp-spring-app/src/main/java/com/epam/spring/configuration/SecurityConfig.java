@@ -1,5 +1,6 @@
 package com.epam.spring.configuration;
 
+import com.epam.spring.security.LogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -11,12 +12,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Qualifier("myUserDetailsService")
     UserDetailsService userDetailsService;
+    @Autowired
+    private LogoutHandler logoutHandler;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -38,7 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers("/login", "/resources/**", "/register")
                 .permitAll().and().authorizeRequests()
-                .anyRequest().authenticated().and().csrf().disable();
+                .anyRequest().authenticated().and().csrf().disable()
+                .logout()
+                .logoutSuccessHandler(logoutHandler);
     }
 
     @Override

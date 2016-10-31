@@ -3,33 +3,19 @@ package com.epam.spring.model;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.Date;
-import java.util.Map;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-@Data
 @Entity
+@Data
 @Builder
-public class RequestEntry {
+public class RequestEntry implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String method;
-    private String path;
-    @ElementCollection
-    @MapKeyColumn(name = "param")
-    @Column(name = "value")
-    @CollectionTable(name = "rq_params", joinColumns = @JoinColumn(name = "rq_id"))
-    private Map<String, String> params;
-    private String requestBody;
-    private String callerAddress;
-    private String responseBody;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date timestamp;
-
-    @PrePersist
-    public void prePersist() {
-        timestamp = new Date();
-    }
-
+    private String request;
+    private String response;
 }

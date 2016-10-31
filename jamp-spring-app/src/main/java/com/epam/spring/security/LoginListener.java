@@ -4,6 +4,7 @@ import com.epam.spring.enums.ActionType;
 import com.epam.spring.jms.Destinations;
 import com.epam.spring.jms.JMSService;
 import com.epam.spring.model.UserAction;
+import org.apache.activemq.command.ActiveMQTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,6 @@ public class LoginListener implements ApplicationListener<InteractiveAuthenticat
                         .getSessionId())
                 .build();
         LOG.info("LoginListener : sending login action {} to jms destination  ", userAction);
-        JMSService.sendMessage(Destinations.USER_ACTIONS_DESTINATION_NAME, userAction);
+        JMSService.sendMessage(new ActiveMQTopic(Destinations.USER_ACTIONS_TOPIC), userAction);
     }
 }

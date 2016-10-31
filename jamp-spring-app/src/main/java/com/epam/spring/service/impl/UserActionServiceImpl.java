@@ -6,10 +6,12 @@ import com.epam.spring.model.UserAction;
 import com.epam.spring.service.UserActionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserActionServiceImpl implements UserActionService {
     @Autowired
     private UserActionDAO userActionDAO;
