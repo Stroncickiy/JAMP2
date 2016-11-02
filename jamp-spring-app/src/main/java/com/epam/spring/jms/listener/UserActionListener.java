@@ -18,7 +18,7 @@ public class UserActionListener {
     @Autowired
     private UserActionService userActionService;
 
-    @JmsListener(destination = Destinations.USER_ACTIONS_TOPIC, containerFactory = "topicListenerFactory")
+    @JmsListener(destination = Destinations.USER_ACTIONS_TOPIC, containerFactory = "topicListener")
     public void receiveUserAction(final Message<UserAction> message) throws JmsException {
         MessageHeaders headers = message.getHeaders();
         LOG.info("UserActionLogger : headers received : {}", headers);
