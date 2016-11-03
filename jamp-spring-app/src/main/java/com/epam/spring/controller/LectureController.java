@@ -1,10 +1,7 @@
 package com.epam.spring.controller;
 
-import com.epam.spring.model.Lecture;
-import com.epam.spring.model.MentorshipPhase;
-import com.epam.spring.service.LectureService;
-import com.epam.spring.service.MentorshipPhaseService;
-import com.epam.spring.service.ParticipantService;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.validation.Valid;
+import com.epam.spring.model.Lecture;
+import com.epam.spring.model.MentorshipPhase;
+import com.epam.spring.service.LectureService;
+import com.epam.spring.service.MentorshipPhaseService;
+import com.epam.spring.service.ParticipantService;
 
 @Controller
 @RequestMapping("/lectures")

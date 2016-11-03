@@ -1,5 +1,12 @@
 package com.epam.spring.service.impl;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.epam.spring.dao.ParticipantDAO;
 import com.epam.spring.dto.MenteeStatistics;
 import com.epam.spring.enums.ParticipantRole;
@@ -7,11 +14,6 @@ import com.epam.spring.enums.ParticipantStatus;
 import com.epam.spring.model.MentorshipPhase;
 import com.epam.spring.model.ParticipantAssignment;
 import com.epam.spring.service.ParticipantService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @Transactional

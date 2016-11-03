@@ -1,8 +1,9 @@
 package com.epam.spring.converter;
 
 
-import com.epam.spring.enums.ParticipantRole;
 import org.springframework.core.convert.converter.Converter;
+
+import com.epam.spring.enums.ParticipantRole;
 
 public class ParticipantRoleConverter implements Converter<String, ParticipantRole> {
     @Override

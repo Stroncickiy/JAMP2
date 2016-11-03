@@ -1,19 +1,29 @@
 package com.epam.spring.service.impl;
 
-import com.epam.spring.enums.GroupStatus;
-import com.epam.spring.enums.ParticipantRole;
-import com.epam.spring.enums.ParticipantStatus;
-import com.epam.spring.enums.UserRole;
-import com.epam.spring.model.*;
-import com.epam.spring.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.epam.spring.enums.GroupStatus;
+import com.epam.spring.enums.ParticipantRole;
+import com.epam.spring.enums.ParticipantStatus;
+import com.epam.spring.enums.UserRole;
+import com.epam.spring.model.Lecture;
+import com.epam.spring.model.MentorshipGroup;
+import com.epam.spring.model.MentorshipPhase;
+import com.epam.spring.model.ParticipantAssignment;
+import com.epam.spring.model.User;
+import com.epam.spring.service.LectureService;
+import com.epam.spring.service.MentorshipGroupService;
+import com.epam.spring.service.MentorshipPhaseService;
+import com.epam.spring.service.ParticipantService;
+import com.epam.spring.service.UserService;
 
 @Service
 public class CreateEntitiesService {

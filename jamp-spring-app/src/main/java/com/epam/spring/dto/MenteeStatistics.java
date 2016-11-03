@@ -2,6 +2,7 @@ package com.epam.spring.dto;
 
 
 import com.epam.spring.model.ParticipantAssignment;
+
 import lombok.Builder;
 import lombok.Data;
 

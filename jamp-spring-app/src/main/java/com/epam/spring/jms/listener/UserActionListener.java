@@ -1,8 +1,5 @@
 package com.epam.spring.jms.listener;
 
-import com.epam.spring.jms.Destinations;
-import com.epam.spring.model.UserAction;
-import com.epam.spring.service.UserActionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +9,24 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 
+import com.epam.spring.jms.Destinations;
+import com.epam.spring.model.UserAction;
+import com.epam.spring.service.UserActionService;
+
 @Component
 public class UserActionListener {
-    static final Logger LOG = LoggerFactory.getLogger(UserActionListener.class);
-    @Autowired
-    private UserActionService userActionService;
+	static final Logger LOG = LoggerFactory.getLogger(UserActionListener.class);
+	@Autowired
+	private UserActionService userActionService;
 
-    @JmsListener(destination = Destinations.USER_ACTIONS_TOPIC, containerFactory = "topicListener")
-    public void receiveUserAction(final Message<UserAction> message) throws JmsException {
-        MessageHeaders headers = message.getHeaders();
-        LOG.info("UserActionLogger : headers received : {}", headers);
+	@JmsListener(destination = Destinations.USER_ACTIONS_TOPIC, containerFactory = "topicListenerFactory")
+	public void receiveUserAction(final Message<UserAction> message) throws JmsException {
+		MessageHeaders headers = message.getHeaders();
+		LOG.info("UserActionLogger : headers received : {}", headers);
 
-        UserAction action = message.getPayload();
-        LOG.info("UserActionLogger : action received : {}", action);
+		UserAction action = message.getPayload();
+		LOG.info("UserActionLogger : action received : {}", action);
 
-        userActionService.add(action);
-    }
+		userActionService.add(action);
+	}
 }

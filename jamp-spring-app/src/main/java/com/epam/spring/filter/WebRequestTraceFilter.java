@@ -1,18 +1,25 @@
 package com.epam.spring.filter;
 
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.activemq.command.ActiveMQQueue;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.epam.spring.jms.Destinations;
 import com.epam.spring.jms.JMSService;
 import com.epam.spring.model.RequestEntry;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.activemq.command.ActiveMQTopic;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class WebRequestTraceFilter implements Filter {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -44,7 +51,7 @@ public class WebRequestTraceFilter implements Filter {
         String responseDescription = getResponseDescription(responseWrapper);
         httpResponse.getOutputStream().write(responseWrapper.getContentAsBytes());
 
-        jmsService.sendMessage(new ActiveMQTopic(Destinations.USER_ACTIONS_TOPIC), RequestEntry.builder()
+        jmsService.sendMessageToQueue(new ActiveMQQueue(Destinations.REQUESTS_TRACKING_DESTINATION), RequestEntry.builder()
                 .request(requestDescription)
                 .response(responseDescription)
                 .build());

@@ -1,9 +1,10 @@
 package com.epam.spring.controller;
 
-import com.epam.spring.dto.CityStatistics;
-import com.epam.spring.dto.CompletionStatistics;
-import com.epam.spring.model.MentorshipPhase;
-import com.epam.spring.service.MentorshipPhaseService;
+import java.util.Date;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
+import com.epam.spring.dto.CityStatistics;
+import com.epam.spring.dto.CompletionStatistics;
+import com.epam.spring.model.MentorshipPhase;
+import com.epam.spring.service.MentorshipPhaseService;
 
 @Controller
 @RequestMapping("/phases")

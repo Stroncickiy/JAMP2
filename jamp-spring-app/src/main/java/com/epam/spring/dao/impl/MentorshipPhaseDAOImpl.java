@@ -1,17 +1,19 @@
 package com.epam.spring.dao.impl;
 
-import com.epam.spring.dao.MentorshipPhaseDAO;
-import com.epam.spring.dto.CityStatistics;
-import com.epam.spring.dto.CompletionStatistics;
-import com.epam.spring.model.MentorshipPhase;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.epam.spring.dao.MentorshipPhaseDAO;
+import com.epam.spring.dto.CityStatistics;
+import com.epam.spring.dto.CompletionStatistics;
+import com.epam.spring.model.MentorshipPhase;
 
 @Repository
 public class MentorshipPhaseDAOImpl extends CommonDAOImpl<MentorshipPhase> implements MentorshipPhaseDAO {

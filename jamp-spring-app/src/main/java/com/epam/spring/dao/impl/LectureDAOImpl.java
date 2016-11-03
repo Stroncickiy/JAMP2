@@ -1,14 +1,16 @@
 package com.epam.spring.dao.impl;
 
-import com.epam.spring.dao.LectureDAO;
-import com.epam.spring.model.Lecture;
-import com.epam.spring.model.MentorshipPhase;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import java.util.List;
+import com.epam.spring.dao.LectureDAO;
+import com.epam.spring.model.Lecture;
+import com.epam.spring.model.MentorshipPhase;
 
 @Repository
 public class LectureDAOImpl extends CommonDAOImpl<Lecture> implements LectureDAO {
@@ -25,5 +27,4 @@ public class LectureDAOImpl extends CommonDAOImpl<Lecture> implements LectureDAO
 		return findPhasesLectures.list();
 	}
 
-	
 }

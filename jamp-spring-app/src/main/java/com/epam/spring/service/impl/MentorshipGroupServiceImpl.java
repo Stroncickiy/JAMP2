@@ -1,16 +1,18 @@
 package com.epam.spring.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.epam.spring.dao.MentorshipGroupDAO;
 import com.epam.spring.model.MentorshipGroup;
 import com.epam.spring.model.MentorshipPhase;
 import com.epam.spring.model.ParticipantAssignment;
 import com.epam.spring.service.MentorshipGroupService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Transactional

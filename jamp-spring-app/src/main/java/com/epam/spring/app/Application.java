@@ -1,7 +1,8 @@
 package com.epam.spring.app;
 
-import com.epam.spring.configuration.DispatcherServletInitializer;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+
+import com.epam.spring.configuration.DispatcherServletInitializer;
 
 public class Application {
 

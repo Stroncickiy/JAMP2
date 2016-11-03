@@ -1,23 +1,29 @@
 package com.epam.spring.dao.impl;
 
-import com.epam.spring.dao.ParticipantDAO;
-import com.epam.spring.dto.MenteeStatistics;
-import com.epam.spring.enums.GroupStatus;
-import com.epam.spring.enums.ParticipantRole;
-import com.epam.spring.enums.ParticipantStatus;
-import com.epam.spring.model.*;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
+
+import com.epam.spring.dao.ParticipantDAO;
+import com.epam.spring.dto.MenteeStatistics;
+import com.epam.spring.enums.GroupStatus;
+import com.epam.spring.enums.ParticipantRole;
+import com.epam.spring.enums.ParticipantStatus;
+import com.epam.spring.model.MentorshipGroup;
+import com.epam.spring.model.MentorshipPhase;
+import com.epam.spring.model.MentorshipPhase_;
+import com.epam.spring.model.ParticipantAssignment;
+import com.epam.spring.model.ParticipantAssignment_;
 
 @Repository
 public class ParticipantDAOImpl extends CommonDAOImpl<ParticipantAssignment>
@@ -57,7 +63,7 @@ public class ParticipantDAOImpl extends CommonDAOImpl<ParticipantAssignment>
     public List<ParticipantAssignment> getMenteesWithoutMentorsInSpecifiedCity(String location) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<ParticipantAssignment> query = cb.createQuery(ParticipantAssignment.class);
-        Root p = query.from(ParticipantAssignment.class);
+        Root<ParticipantAssignment> p = query.from(ParticipantAssignment.class);
         Join<ParticipantAssignment, MentorshipPhase> assignmentMentorshipPhaseJoin = p.join(ParticipantAssignment_.phase);
         query.where(cb.and(
                 cb.equal(p.get(ParticipantAssignment_.role), ParticipantRole.MENTEE),

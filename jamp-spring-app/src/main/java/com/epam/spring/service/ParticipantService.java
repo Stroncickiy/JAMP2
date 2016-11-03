@@ -1,11 +1,11 @@
 package com.epam.spring.service;
 
+import java.util.List;
+
 import com.epam.spring.dto.MenteeStatistics;
 import com.epam.spring.enums.ParticipantRole;
 import com.epam.spring.model.MentorshipPhase;
 import com.epam.spring.model.ParticipantAssignment;
-
-import java.util.List;
 
 public interface ParticipantService extends CommonService<ParticipantAssignment> {
 

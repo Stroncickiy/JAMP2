@@ -1,8 +1,9 @@
 package com.epam.spring.converter;
 
 
-import com.epam.spring.enums.ParticipantStatus;
 import org.springframework.core.convert.converter.Converter;
+
+import com.epam.spring.enums.ParticipantStatus;
 
 public class ParticipantStatusConverter implements Converter<String, ParticipantStatus> {
     @Override

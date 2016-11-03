@@ -1,13 +1,13 @@
 server:
-  port: 80
+  port: 8080
 spring:
- jpa:
+  jpa:
     database: MYSQL
-    show-sql : true
+    show-sql: true
     hibernate:
-     ddl-auto : create-drop
- datasource:
-        url: jdbc:mysql://localhost:3306/mentorship?create=true
-        username: root
-        password: root
-        driver-class-name: "com.mysql.jdbc.Driver"
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:mysql://localhost:3306/mentorship?create=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver

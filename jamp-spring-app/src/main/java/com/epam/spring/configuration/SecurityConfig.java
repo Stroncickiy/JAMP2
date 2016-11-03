@@ -1,9 +1,9 @@
 package com.epam.spring.configuration;
 
-import com.epam.spring.security.LogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,12 +19,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("myUserDetailsService")
     UserDetailsService userDetailsService;
-    @Autowired
-    private LogoutHandler logoutHandler;
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.authenticationEventPublisher(defaultAuthenticationEventPublisher());
     }
 
     protected void configure(HttpSecurity http) throws Exception {
@@ -42,9 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers("/login", "/resources/**", "/register")
                 .permitAll().and().authorizeRequests()
-                .anyRequest().authenticated().and().csrf().disable()
-                .logout()
-                .logoutSuccessHandler(logoutHandler);
+                .anyRequest().authenticated().and().csrf().disable();
     }
 
     @Override
@@ -56,5 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    @Bean
+    public DefaultAuthenticationEventPublisher defaultAuthenticationEventPublisher(){
+        return new DefaultAuthenticationEventPublisher();
+    }
 }

@@ -1,13 +1,14 @@
 package com.epam.spring.service.impl;
 
-import com.epam.spring.dao.RequestEntryDAO;
-import com.epam.spring.model.RequestEntry;
-import com.epam.spring.service.RequestEntryService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.epam.spring.dao.RequestEntryDAO;
+import com.epam.spring.model.RequestEntry;
+import com.epam.spring.service.RequestEntryService;
 
 @Service
 @Transactional
