@@ -14,7 +14,7 @@
 <%@ include file="head.jsp" %>
 <h3 class="text-center">Add new Group</h3>
 <div id="shell">
-    <div id=main">
+    <div id="main" >
         <form:form action="${pageContext.request.contextPath}/groups/add/"
                    commandName="groupToAdd" method="post">
             <form:hidden path="status"></form:hidden>

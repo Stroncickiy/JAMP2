@@ -1,4 +1,4 @@
-package com.epam.spring.filter;
+package com.epam.spring.interceptor;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 

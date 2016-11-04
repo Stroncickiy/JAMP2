@@ -1,4 +1,4 @@
-package com.epam.spring.filter;
+package com.epam.spring.interceptor;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

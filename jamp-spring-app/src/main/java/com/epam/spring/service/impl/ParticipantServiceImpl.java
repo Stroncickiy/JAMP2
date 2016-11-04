@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epam.spring.dao.CommonDAO;
 import com.epam.spring.dao.ParticipantDAO;
 import com.epam.spring.dto.MenteeStatistics;
 import com.epam.spring.enums.ParticipantRole;
@@ -17,40 +18,10 @@ import com.epam.spring.service.ParticipantService;
 
 @Service
 @Transactional
-public class ParticipantServiceImpl implements ParticipantService {
+public class ParticipantServiceImpl extends CommonServiceImpl<ParticipantAssignment> implements ParticipantService {
     @Autowired
     private ParticipantDAO participantDAO;
 
-    @Override
-    public ParticipantAssignment add(ParticipantAssignment item) {
-        return participantDAO.add(item);
-    }
-
-    @Override
-    public boolean remove(ParticipantAssignment item) {
-        return participantDAO.remove(item);
-    }
-
-    @Override
-    public ParticipantAssignment getById(Long id) {
-        return participantDAO.getById(id);
-    }
-
-    @Override
-    public List<ParticipantAssignment> getAll() {
-        return participantDAO.getAll();
-    }
-
-    @Override
-    public boolean update(ParticipantAssignment item) {
-        return participantDAO.update(item);
-    }
-
-    @Override
-    public void refresh(ParticipantAssignment item) {
-        participantDAO.refresh(item);
-
-    }
 
     @Override
     public List<ParticipantAssignment> getLectorsForPhase(MentorshipPhase phase) {
@@ -83,4 +54,9 @@ public class ParticipantServiceImpl implements ParticipantService {
     public List<MenteeStatistics> getMenteesStatisticsDescendingWithPagination(int page) {
         return participantDAO.getMenteesStatisticsDescendingWithPagination(page);
     }
+
+	@Override
+	public CommonDAO<ParticipantAssignment> getDaoDelegate() {
+		return participantDAO;
+	}
 }

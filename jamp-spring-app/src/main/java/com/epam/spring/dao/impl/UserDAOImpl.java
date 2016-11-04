@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.LongType;
 import org.hibernate.type.StringType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.epam.spring.dao.UserDAO;
@@ -23,9 +24,9 @@ import com.epam.spring.model.User;
 @Repository
 public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 
-	@PostConstruct
-	public void init() {
-		targetClass = User.class;
+	@Autowired
+	public UserDAOImpl(EntityManager entityManager) {
+		super(User.class, entityManager);
 	}
 
 	@Override
@@ -55,4 +56,6 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 		sqlQuery.setResultTransformer(Transformers.aliasToBean(TimeSpentByUserRecord.class));
 		return sqlQuery.list();
 	}
+
+
 }

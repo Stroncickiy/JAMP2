@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.epam.spring.dao.CommonDAO;
 import com.epam.spring.dao.UserDAO;
 import com.epam.spring.model.TimeSpentByUserRecord;
 import com.epam.spring.model.User;
@@ -18,7 +19,7 @@ import com.epam.spring.service.UserService;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends CommonServiceImpl<User> implements UserService {
 
 	@Autowired
 	private UserDAO userDAO;
@@ -36,43 +37,19 @@ public class UserServiceImpl implements UserService {
 		return userDAO.add(user);
 	}
 
-	public boolean remove(User user) {
-		return userDAO.remove(user);
-	}
-
-	public User getById(long id) {
-		return userDAO.getById(id);
-	}
-
-	@Override
-	public List<User> getAll() {
-		return userDAO.getAll();
-	}
-
-	@Override
-	public boolean update(User user) {
-		return userDAO.update(user);
-	}
-
 	@Override
 	public User getUserByEmail(String email) {
 		return userDAO.getUserByEmail(email);
 	}
 
 	@Override
-	public User getById(Long id) {
-		return userDAO.getById(id);
-	}
-
-	@Override
-	public void refresh(User item) {
-		userDAO.refresh(item);
-
-	}
-
-	@Override
 	public List<TimeSpentByUserRecord> getStatisticsOfTimeSpentOnSiteForPeriod(LocalDateTime from, LocalDateTime to) {
 		return userDAO.getStatisticsOfTimeSpentOnSiteForPeriod(from, to);
+	}
+
+	@Override
+	public CommonDAO<User> getDaoDelegate() {
+		return userDAO;
 	}
 
 }
