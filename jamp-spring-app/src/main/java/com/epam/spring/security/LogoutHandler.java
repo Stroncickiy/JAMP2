@@ -28,10 +28,12 @@ public class LogoutHandler extends SimpleUrlLogoutSuccessHandler {
 
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    	WebAuthenticationDetails auth = (WebAuthenticationDetails) authentication.getDetails();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         UserAction userAction = UserAction.builder()
                 .email(userDetails.getUsername())
                 .success(true)
+                .ip(auth.getRemoteAddress())
                 .timestamp(new Date())
                 .actionType(ActionType.LOGOUT)
                 .session(((WebAuthenticationDetails) authentication.getDetails())

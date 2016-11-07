@@ -26,11 +26,13 @@ public class LoginListener implements ApplicationListener<InteractiveAuthenticat
 
     @Override
     public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
+    	WebAuthenticationDetails auth = (WebAuthenticationDetails) event.getAuthentication().getDetails();
         UserDetails userDetails = (UserDetails) event.getAuthentication().getPrincipal();
         UserAction userAction = UserAction.builder()
                 .email(userDetails.getUsername())
                 .success(true)
                 .timestamp(new Date())
+                .ip(auth.getRemoteAddress())
                 .actionType(ActionType.LOGIN)
                 .session(((WebAuthenticationDetails) event.getAuthentication().getDetails())
                         .getSessionId())

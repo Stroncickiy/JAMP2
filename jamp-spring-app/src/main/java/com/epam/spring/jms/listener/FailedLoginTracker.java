@@ -18,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
 
 @Component
-public class LoginFailedListener {
-    static final Logger LOG = LoggerFactory.getLogger(LoginFailedListener.class);
+public class FailedLoginTracker {
+    static final Logger LOG = LoggerFactory.getLogger(FailedLoginTracker.class);
     private Map<String, LongAdder> failedLoginsForLast10MinByUsername = ExpiringMap.builder()
             .expiration(10, TimeUnit.MINUTES)
             .build();
@@ -31,10 +31,10 @@ public class LoginFailedListener {
     @Autowired
     private AdminNotificationService notificationService;
 
-    @JmsListener(destination = Destinations.USER_ACTIONS_TOPIC, containerFactory = "topicListenerFactory", selector = "action=login and success=false ")
+    @JmsListener(destination = Destinations.USER_ACTIONS_TOPIC, containerFactory = "topicListenerFactory", selector = " (action = 'login') AND (success = FALSE) ")
     public void receiveUserAction(final Message<UserAction> message) throws JmsException {
         UserAction loginFailedAction = message.getPayload();
-        LOG.info("LoginFailedListener : action received : {}", loginFailedAction);
+        LOG.info("FailedLoginTracker : action received : {}", loginFailedAction);
 
 
         failedLoginsForLast10MinByUsername.computeIfAbsent(loginFailedAction.getEmail(), s -> {
@@ -44,7 +44,7 @@ public class LoginFailedListener {
         });
 
         failedLoginsForLast10MinByUsername.computeIfPresent(loginFailedAction.getEmail(), (s, longAdder) -> {
-            if (longAdder.intValue() == 2) {
+            if (longAdder.intValue() == 3) {
                 // means that it is third attempt for current user
                 notificationService.notifyThatUserLoginFailed3Times(loginFailedAction.getEmail());
             }

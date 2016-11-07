@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import com.epam.spring.security.LogoutHandler;
 
@@ -22,12 +23,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     UserDetailsService userDetailsService;
     @Autowired
 	private LogoutHandler logoutHandler;
-
-
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    @Qualifier("customFailureHandler")
+	private AuthenticationFailureHandler customFailureHandler;
+    
+    
+    
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    	   auth
+           .userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+    
+   
 
     protected void configure(HttpSecurity http) throws Exception {
         http.exceptionHandling()
@@ -35,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .failureUrl("/login?error")
+                .failureHandler(customFailureHandler)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/").and().authorizeRequests()

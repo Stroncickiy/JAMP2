@@ -1,18 +1,19 @@
 package com.epam.spring.interceptor;
 
-import com.epam.spring.jms.Destinations;
-import com.epam.spring.jms.JMSService;
-import com.epam.spring.model.InteractionEntry;
-import com.epam.spring.model.InteractionEntry.InteractionEntryBuilder;
-import org.apache.activemq.command.ActiveMQQueue;
-import org.springframework.web.filter.AbstractRequestLoggingFilter;
+import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
+
+import org.apache.activemq.command.ActiveMQQueue;
+import org.springframework.web.filter.AbstractRequestLoggingFilter;
+
+import com.epam.spring.jms.Destinations;
+import com.epam.spring.jms.JMSService;
+import com.epam.spring.model.InteractionEntry;
+import com.epam.spring.model.InteractionEntry.InteractionEntryBuilder;
 
 
 public class InteractionTrackingInterceptor extends AbstractRequestLoggingFilter {
