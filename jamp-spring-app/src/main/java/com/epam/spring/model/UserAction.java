@@ -34,5 +34,6 @@ public class UserAction implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
 	private String session;
+	private String ip;
 
 }

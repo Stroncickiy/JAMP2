@@ -5,6 +5,9 @@ import java.util.List;
 import com.epam.spring.dao.CommonDAO;
 import com.epam.spring.service.CommonService;
 
+import javax.transaction.Transactional;
+
+@Transactional
 public abstract class CommonServiceImpl<O> implements CommonService<O> {
 
 	@Override
