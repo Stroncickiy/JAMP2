@@ -3,7 +3,7 @@ package com.epam.websockets.client;
 import java.net.URI;
 import java.util.Scanner;
 
-import javax.websocket.ClientEndpoint;
+import javax.json.Json;
 import javax.websocket.Session;
 
 import org.glassfish.tyrus.client.ClientManager;
@@ -20,7 +20,7 @@ public class Client {
 		System.out.println("Welcome to Tiny Chat!");
 		System.out.println("What's your name?");
 		String user = scanner.nextLine();
-		Session session = client.connectToServer(ClientEndpoint.class, new URI(SERVER));
+		Session session = client.connectToServer(ChatClientEndpoint.class, new URI(SERVER));
 		System.out.println("You are logged in as: " + user);
 
 		// repeatedly read a message and send it to the server (until quit)
@@ -31,7 +31,13 @@ public class Client {
 	}
 
 	private static String formatMessage(String message, String user) {
-		return "msg|" + user + "|" + message;
+		return Json
+				.createObjectBuilder()
+				.add("message", message)
+				.add("sender", user)
+				.add("received", "")
+				.build()
+				.toString();
 	}
 
 }
