@@ -2,15 +2,17 @@ package com.epam.pingpong;
 
 public class PingPongDemo {
 
+	private static final String TURN_1_NAME = "ping";
+	private static final String TUNR_2_NAME = "pong";
+	private Table controller = new Table(10);
+
 	public void run() throws InterruptedException {
 
-		Table controller = new Table(100);
+		Turn ping = controller.createTurn(TURN_1_NAME);
+		Turn pong = controller.createTurn(TUNR_2_NAME);
 
-		Turn ping = new Turn("ping", controller);
-		Turn pong = new Turn("pong", controller);
-
-		new Thread(ping).start();
-		new Thread(pong).start();
+		startTurn(ping);
+		startTurn(pong);
 
 		Thread.sleep(100L);
 
@@ -19,4 +21,9 @@ public class PingPongDemo {
 		}
 
 	}
+
+	private void startTurn(Turn ping) {
+		new Thread(ping).start();
+	}
+
 }

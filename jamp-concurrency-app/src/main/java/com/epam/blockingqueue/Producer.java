@@ -12,13 +12,22 @@ public class Producer implements Runnable {
 
 	public void run() {
 		try {
-			queue.put("1");
-			Thread.sleep(1000);
-			queue.put("2");
-			Thread.sleep(1000);
-			queue.put("3");
+			produceMessages("1", "2", "3", "4");
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			System.out.println("Error occred while producing messages.. ");
 		}
+
+	}
+
+	private void produceMessages(String... msgs) throws InterruptedException {
+		for (String msg : msgs) {
+			putMessage(msg);
+		}
+
+	}
+
+	private void putMessage(String msg) throws InterruptedException {
+		queue.put(msg);
+		Thread.sleep(1000);
 	}
 }

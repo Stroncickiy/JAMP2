@@ -1,6 +1,7 @@
 package com.epam.blockingqueue;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class Consumer implements Runnable {
 
@@ -12,11 +13,19 @@ public class Consumer implements Runnable {
 
 	public void run() {
 		try {
-			System.out.println(queue.take());
-			System.out.println(queue.take());
-			System.out.println(queue.take());
+			String msg = retrieveMessageWithTimeout();
+			while (msg != null) {
+				System.out.println(msg);
+				msg = retrieveMessageWithTimeout();
+			}
+			System.out.println("No more messages available, consumer will stop it's work... ");
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			System.out.println("Error occured whule retrieving messages");
 		}
+
+	}
+
+	private String retrieveMessageWithTimeout() throws InterruptedException {
+		return queue.poll(1000L, TimeUnit.MILLISECONDS);
 	}
 }

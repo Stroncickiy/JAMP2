@@ -1,6 +1,7 @@
 package com.epam.pingpong;
 
 public class Turn implements Runnable {
+	private static final int TIMEOUT = 100;
 	private String turnName;
 	private Table controller;
 
@@ -11,16 +12,18 @@ public class Turn implements Runnable {
 
 	public void run() {
 		synchronized (controller) {
-			while (controller.getNumberOfTurns() > 0) {
+			while (controller.getCurrentNumberOfTurns() > 0) {
 				try {
 					controller.wait();
 					controller.performTurn(turnName);
-					controller.wait(1000);
+					controller.wait(TIMEOUT);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					System.out.format("Error occured while performing turn %s", turnName);
 				}
 				controller.notify();
 			}
+			System.out.format("All %s turn were performed, %s will stop it's work ... \n ",
+					controller.getOriginalNumberOfTurns(), turnName);
 		}
 
 	}

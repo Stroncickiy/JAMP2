@@ -1,11 +1,9 @@
 package com.epam;
 
-import com.epam.readwritelock.ReadWriteLockDemo;
-
 public class Application {
 	public static void main(String[] args) throws Exception {
 
-		// new PingPongDemonstration().run();
+		// new PingPongDemo().run();
 
 		// new PrimeNumbersPrintersDemo().run();
 
@@ -17,6 +15,6 @@ public class Application {
 		
 		//new BlockingQueueDemo().run();
 		
-		new ReadWriteLockDemo().run();
+		//new ReadWriteLockDemo().run();
 	}
 }

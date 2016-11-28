@@ -8,35 +8,38 @@ public class PipeCommunicationDemo {
 	public void run() throws IOException {
 
 		final PipedOutputStream output = new PipedOutputStream();
-		@SuppressWarnings("resource")
 		final PipedInputStream input = new PipedInputStream(output);
 
-		Thread thread1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					output.write("Hello world, pipe!".getBytes());
-				} catch (IOException e) {
+		startPipedWriter(output);
+		startPipedReader(input);
+
+	}
+
+	private void startPipedReader(final PipedInputStream input) {
+		new Thread(() -> {
+			try {
+				int data = input.read();
+				// while data available
+				while (data != -1) {
+					System.out.print((char) data); // Converting it to character
+													// and write to system
+													// output
+					data = input.read(); // refresh data variable for loop
 				}
+
+			} catch (IOException e) {
+				System.out.println("IO Error occured while reading bytes from piped stream...");
 			}
 		});
+	}
 
-		Thread thread2 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					int data = input.read();
-					while (data != -1) {
-						System.out.print((char) data);
-						data = input.read();
-					}
-				} catch (IOException e) {
-				}
+	private void startPipedWriter(final PipedOutputStream output) {
+		new Thread(() -> {
+			try {
+				output.write("Hello world, pipe!".getBytes());
+			} catch (IOException e) {
+				System.out.println("IO Error occured while writing bytes to piped stream...");
 			}
 		});
-
-		thread1.start();
-		thread2.start();
-
 	}
 }

@@ -5,17 +5,18 @@ import java.util.List;
 import java.util.Random;
 
 public class VendingMachine {
-	private List<Object> objectsToSynchronizeOnIn3Methods = new ArrayList<>(3);
+	private static final int SIMULTANOUS_ACTIONS_ALLOWED = 3;
+	private List<Object> objectsToSynchronizeOnIn3Methods = new ArrayList<>(SIMULTANOUS_ACTIONS_ALLOWED);
 
 	public VendingMachine(boolean synchronizeOnTheSameObject) {
 		if (synchronizeOnTheSameObject) {
-			objectsToSynchronizeOnIn3Methods.add(this);
-			objectsToSynchronizeOnIn3Methods.add(this);
-			objectsToSynchronizeOnIn3Methods.add(this);
+			for (int i = 0; i < SIMULTANOUS_ACTIONS_ALLOWED; i++) {				
+				objectsToSynchronizeOnIn3Methods.add(this);
+			}
 		} else {
-			objectsToSynchronizeOnIn3Methods.add(new Object());
-			objectsToSynchronizeOnIn3Methods.add(new Object());
-			objectsToSynchronizeOnIn3Methods.add(new Object());
+			for (int i = 0; i < SIMULTANOUS_ACTIONS_ALLOWED; i++) {				
+				objectsToSynchronizeOnIn3Methods.add(new Object());
+			}
 
 		}
 	}
