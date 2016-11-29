@@ -85,7 +85,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://activemq:61616");
         factory.setTrustAllPackages(true);
         return factory;
     }

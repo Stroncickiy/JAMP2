@@ -1,0 +1,30 @@
+version: '2'
+services:
+    activemq:
+        image: rmohr/activemq:5.11.1
+        ports:
+           - "8161:8161"
+        expose: 
+           - "61616"
+    mysqldb:
+        image: mysql:latest
+        environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_USER=root
+        - MYSQL_PASSWORD=root
+        - MYSQL_DATABASE=mentorship
+        ports:
+            - "3306:3306"
+        expose:
+            - "3306"    
+    web:
+        build : .
+        ports : 
+            - "8080:8080"
+        expose: 
+            - "8080"
+        depends_on:
+           - mysqldb
+           - activemq
+        links:
+           - mysqldb

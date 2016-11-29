@@ -38,10 +38,12 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		  <finalName>jamp-spring-app</finalName>
 	</build>
 	<properties>
 		<jackson.version>2.5.3</jackson.version>
-	</properties>
+		<docker.image.prefix>jamp</docker.image.prefix>
+</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
