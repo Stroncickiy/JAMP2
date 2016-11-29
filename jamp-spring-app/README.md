@@ -7,3 +7,7 @@
  3. specify admin.mail in src\main\resources\app.properties  to be able to recieve warning mails
  4. mvn spring-boot:run
  5. localhost:8080  cradentials admin@epam.com/adminadmin 
+ 
+ 
+# Update 
+	to run with Docker just run 'docker-compose up' in project folder 
