@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.epam.spring.dao.ParticipantDAO;
@@ -32,11 +33,10 @@ public class ParticipantDAOImpl extends CommonDAOImpl<ParticipantAssignment>
     private int ITEMS_PER_PAGE = 10;
 
 
-    @PostConstruct
-    public void init() {
-        targetClass = ParticipantAssignment.class;
-    }
-
+    @Autowired
+	public ParticipantDAOImpl(EntityManager entityManager) {
+		super(ParticipantAssignment.class, entityManager);
+	}
     @Override
     public List<ParticipantAssignment> getParticipantsOfPhaseByRole(MentorshipPhase phase, ParticipantRole role,
                                                                     ParticipantStatus status) {
@@ -119,6 +119,7 @@ public class ParticipantDAOImpl extends CommonDAOImpl<ParticipantAssignment>
         }
         return mentorshipWeeks;
     }
+
 
 
 }

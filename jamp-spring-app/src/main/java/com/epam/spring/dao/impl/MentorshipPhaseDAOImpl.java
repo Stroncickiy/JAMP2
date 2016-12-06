@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.epam.spring.dao.MentorshipPhaseDAO;
@@ -17,10 +18,11 @@ import com.epam.spring.model.MentorshipPhase;
 
 @Repository
 public class MentorshipPhaseDAOImpl extends CommonDAOImpl<MentorshipPhase> implements MentorshipPhaseDAO {
-    @PostConstruct
-    public void init() {
-        targetClass = MentorshipPhase.class;
-    }
+  
+	@Autowired
+	public MentorshipPhaseDAOImpl(EntityManager entityManager) {
+		super(MentorshipPhase.class, entityManager);
+	}
 
     @Override
     public List<CityStatistics> getStatisticsForEachCity() {
@@ -69,4 +71,5 @@ public class MentorshipPhaseDAOImpl extends CommonDAOImpl<MentorshipPhase> imple
                     .build();
         }
     }
+
 }

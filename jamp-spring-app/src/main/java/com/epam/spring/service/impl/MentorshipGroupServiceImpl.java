@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epam.spring.dao.CommonDAO;
 import com.epam.spring.dao.MentorshipGroupDAO;
 import com.epam.spring.model.MentorshipGroup;
 import com.epam.spring.model.MentorshipPhase;
@@ -16,7 +17,7 @@ import com.epam.spring.service.MentorshipGroupService;
 
 @Service
 @Transactional
-public class MentorshipGroupServiceImpl implements MentorshipGroupService {
+public class MentorshipGroupServiceImpl extends CommonServiceImpl<MentorshipGroup> implements MentorshipGroupService {
 
     @Autowired
     private MentorshipGroupDAO groupDao;
@@ -31,21 +32,6 @@ public class MentorshipGroupServiceImpl implements MentorshipGroupService {
     }
 
     @Override
-    public boolean remove(MentorshipGroup item) {
-        return groupDao.remove(item);
-    }
-
-    @Override
-    public MentorshipGroup getById(Long id) {
-        return groupDao.getById(id);
-    }
-
-    @Override
-    public List<MentorshipGroup> getAll() {
-        return groupDao.getAll();
-    }
-
-    @Override
     public boolean update(MentorshipGroup item) {
         List<ParticipantAssignment> participants = new ArrayList<>();
         participants.add(item.getMentor());
@@ -54,16 +40,16 @@ public class MentorshipGroupServiceImpl implements MentorshipGroupService {
         return groupDao.update(item);
     }
 
-    @Override
-    public void refresh(MentorshipGroup item) {
-        groupDao.refresh(item);
-
-    }
 
     @Override
     public List<MentorshipGroup> getForPhase(MentorshipPhase targetMentorshipPhase) {
         return groupDao.getForPhase(targetMentorshipPhase);
     }
+
+	@Override
+	public CommonDAO<MentorshipGroup> getDaoDelegate() {
+		return groupDao;
+	}
 
 
 }

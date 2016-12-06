@@ -6,15 +6,20 @@ import javax.persistence.EntityManager;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.epam.spring.dao.CommonDAO;
 
+@SuppressWarnings("unchecked")
 public abstract class CommonDAOImpl<O> implements CommonDAO<O> {
 
-	@Autowired
+	private Class<?> targetClass;
 	protected EntityManager entityManager;
-	protected Class<?> targetClass;
+
+	public CommonDAOImpl(Class<?> targetClass, EntityManager entityManager) {
+		this.targetClass = targetClass;
+		this.entityManager = entityManager;
+
+	}
 
 	@Override
 	public O add(O item) {
@@ -46,16 +51,12 @@ public abstract class CommonDAOImpl<O> implements CommonDAO<O> {
 
 	@Override
 	public List<O> getAll() {
-		return ((Session) entityManager.getDelegate()).createCriteria(getTargetClass()).list();
-	}
-
-	protected Class<?> getTargetClass() {
-		return targetClass;
+		return ((Session) entityManager.getDelegate()).createCriteria(targetClass).list();
 	}
 
 	@Override
 	public O getById(Long key) {
-		return (O) entityManager.find(getTargetClass(), key);
+		return (O) entityManager.find(targetClass, key);
 	}
 
 	public void refresh(O item) {
